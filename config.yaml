@@ -1,31 +1,58 @@
-# Theosis configuration
-# Copy this file and fill in your API keys.
-
-aggregator:
-  name: "aggregator"
-  model: "gpt-4o"
-  base_url: "https://api.openai.com/v1"
-  api_key: ""          # set OPENAI_API_KEY env var or fill here
+# Theosis — cấu hình "council".
+# Mỗi slot là một endpoint OpenAI-compatible (đường dẫn .../v1).
+# Key lấy từ biến môi trường qua `api_key_env` — KHÔNG ghi key thẳng vào file này.
+#
+# Base URL phổ biến (đều OpenAI-compatible):
+#   OpenAI       https://api.openai.com/v1
+#   Anthropic    https://api.anthropic.com/v1     (endpoint OpenAI-compat của Claude)
+#   OpenRouter   https://openrouter.ai/api/v1
+#   DeepSeek     https://api.deepseek.com/v1
+#   xAI (Grok)   https://api.x.ai/v1
+#   Groq         https://api.groq.com/openai/v1
+#   Ollama local http://localhost:11434/v1        (đặt api_key: ollama)
+#
+# Mẹo thử nhanh không cần key: chạy với THEOSIS_DEMO=1 (model giả lập).
 
 slots:
-  - name: "slot-a"
-    model: "gpt-4o-mini"
-    base_url: "https://api.openai.com/v1"
-    api_key: ""
+  - name: opus
+    model: claude-opus-4-8          # ⚠️ đổi cho khớp tên model của provider
+    base_url: https://api.anthropic.com/v1
+    api_key_env: ANTHROPIC_API_KEY
+    system: "Bạn nghiêm ngặt, chính xác, không phỏng đoán bừa."
     enabled: true
 
-  - name: "slot-b"
-    model: "gpt-4o-mini"
-    base_url: "https://api.openai.com/v1"
-    api_key: ""
+  - name: gpt
+    model: gpt-4o
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    system: "Bạn khai thác nhiều góc nhìn và đào sâu."
     enabled: true
 
-  # Add more slots to mix providers (any OpenAI-compatible endpoint works)
-  # - name: "claude"
-  #   model: "claude-3-5-sonnet-20241022"
-  #   base_url: "https://api.anthropic.com/v1"
-  #   api_key: ""
-  #   enabled: false
+  # ── Thêm slot chỉ bằng cách bỏ comment — không cần đụng code ──
+  # - name: deepseek
+  #   model: deepseek-chat
+  #   base_url: https://api.deepseek.com/v1
+  #   api_key_env: DEEPSEEK_API_KEY
+  #   enabled: true
+  #
+  # - name: grok
+  #   model: grok-4
+  #   base_url: https://api.x.ai/v1
+  #   api_key_env: XAI_API_KEY
+  #   enabled: true
+  #
+  # - name: local
+  #   model: llama3
+  #   base_url: http://localhost:11434/v1
+  #   api_key: ollama
+  #   enabled: true
 
-pipeline:
-  max_rounds: 2        # number of audit→patch iterations before final merge
+# Model đứng ra tổng hợp (= trần chất lượng). Chọn model phân biệt đúng/sai tốt nhất.
+aggregator:
+  name: aggregator
+  model: claude-opus-4-8
+  base_url: https://api.anthropic.com/v1
+  api_key_env: ANTHROPIC_API_KEY
+
+settings:
+  max_rounds: 2
