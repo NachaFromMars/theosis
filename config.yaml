@@ -1,0 +1,31 @@
+# Theosis configuration
+# Copy this file and fill in your API keys.
+
+aggregator:
+  name: "aggregator"
+  model: "gpt-4o"
+  base_url: "https://api.openai.com/v1"
+  api_key: ""          # set OPENAI_API_KEY env var or fill here
+
+slots:
+  - name: "slot-a"
+    model: "gpt-4o-mini"
+    base_url: "https://api.openai.com/v1"
+    api_key: ""
+    enabled: true
+
+  - name: "slot-b"
+    model: "gpt-4o-mini"
+    base_url: "https://api.openai.com/v1"
+    api_key: ""
+    enabled: true
+
+  # Add more slots to mix providers (any OpenAI-compatible endpoint works)
+  # - name: "claude"
+  #   model: "claude-3-5-sonnet-20241022"
+  #   base_url: "https://api.anthropic.com/v1"
+  #   api_key: ""
+  #   enabled: false
+
+pipeline:
+  max_rounds: 2        # number of audit→patch iterations before final merge
