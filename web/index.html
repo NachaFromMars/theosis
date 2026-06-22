@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Theosis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ─────────────────────────────────────────────────────────────
+     Theosis — gold leaf on iconographic ink.
+     Palette grounded in Orthodox icon gilding: deep blue-black ground,
+     warm bone text, gilt accent reserved for the unified answer.
+     Type: Cormorant (liturgical display) × IBM Plex (the machine).
+     ───────────────────────────────────────────────────────────── */
+  :root{
+    --ink:#0E0F16; --ink-2:#15161F; --ink-3:#1C1E2B;
+    --line:#2A2D40; --line-soft:#232635;
+    --vellum:#ECE7D8; --muted:#8B8DA0; --muted-2:#646678;
+    --gold:#D8B45A; --gold-deep:#B8923E; --gold-soft:rgba(216,180,90,.13);
+    --green:#8FCB7A; --rose:#E08A8A;
+    --display:'Cormorant Garamond', Georgia, serif;
+    --sans:'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    --mono:'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
+    --r:14px; --r-sm:9px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:var(--sans);background:var(--ink);color:var(--vellum);-webkit-font-smoothing:antialiased;line-height:1.55}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(60% 38% at 50% -8%, rgba(216,180,90,.10), transparent 70%)}
+  ::selection{background:var(--gold-soft);color:#fff}
+
+  .app{position:relative;z-index:1;display:grid;grid-template-columns:312px 1fr;height:100vh;overflow:hidden}
+
+  /* ── Sidebar / Council ─────────────────────────────────────── */
+  .rail{border-right:1px solid var(--line);background:linear-gradient(180deg,var(--ink-2),var(--ink));padding:26px 22px 30px;display:flex;flex-direction:column;gap:26px;position:sticky;top:0;height:100vh;overflow-y:auto}
+  .brand{display:flex;flex-direction:column;gap:6px}
+  .brand__mark{font-family:var(--display);font-weight:600;font-size:38px;letter-spacing:.5px;line-height:1;color:var(--vellum);display:flex;align-items:baseline;gap:10px}
+  .gilt{width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F4DD9A,var(--gold) 55%,var(--gold-deep));box-shadow:0 0 14px rgba(216,180,90,.5);align-self:center}
+  .brand__tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);max-width:230px;line-height:1.5}
+  .demo-pill{align-self:flex-start;margin-top:2px;font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-deep);border-radius:999px;padding:3px 9px;display:none}
+  .demo-pill.show{display:inline-block}
+
+  .group__label{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);margin-bottom:11px}
+  .voices{display:flex;flex-direction:column;gap:8px}
+  .voice-row{display:flex;align-items:center;gap:11px;padding:10px 12px;background:var(--ink-3);border:1px solid var(--line-soft);border-radius:var(--r-sm);cursor:pointer;transition:border-color .15s,background .15s}
+  .voice-row:hover{border-color:var(--line)}
+  .voice-row__dot{width:9px;height:9px;border-radius:50%;background:var(--c,#666);flex:none;box-shadow:0 0 9px -1px var(--c)}
+  .voice-row__txt{flex:1;min-width:0}
+  .voice-row__name{font-size:13.5px;font-weight:600;color:var(--vellum);display:flex;align-items:center}
+  .voice-row__model{font-family:var(--mono);font-size:10.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .warn{margin-left:6px;font-size:11px;color:var(--gold);cursor:help}
+  .switch{position:relative;width:34px;height:19px;flex:none}
+  .switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+  .switch__track{position:absolute;inset:0;background:#34384c;border-radius:999px;transition:background .18s}
+  .switch__track::after{content:"";position:absolute;top:2px;left:2px;width:15px;height:15px;border-radius:50%;background:#0c0d13;transition:transform .18s}
+  .switch input:checked + .switch__track{background:var(--gold-deep)}
+  .switch input:checked + .switch__track::after{transform:translateX(15px);background:#1a160b}
+  .switch input:focus-visible + .switch__track{outline:2px solid var(--gold);outline-offset:2px}
+
+  .agg-row{display:flex;align-items:center;gap:11px;padding:10px 12px;border:1px dashed var(--gold-deep);border-radius:var(--r-sm);background:var(--gold-soft)}
+  .agg-row__dot{width:9px;height:9px;border-radius:50%;background:var(--gold);flex:none;box-shadow:0 0 10px rgba(216,180,90,.6)}
+  .agg-row__txt{flex:1;min-width:0}
+  .agg-row__name{font-size:13px;font-weight:600;display:flex;align-items:center}
+  .agg-row__model{font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+
+  .stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:var(--r-sm);width:fit-content;overflow:hidden}
+  .stepper button{width:38px;height:36px;background:var(--ink-3);border:none;color:var(--vellum);font-size:18px;cursor:pointer;transition:background .15s}
+  .stepper button:hover{background:#262838}
+  .stepper button:disabled{opacity:.35;cursor:not-allowed}
+  .stepper__val{min-width:42px;text-align:center;font-family:var(--mono);font-size:15px}
+  .hint{font-size:11.5px;color:var(--muted-2);margin-top:9px;line-height:1.5}
+
+  .rail__foot{margin-top:auto;font-size:11px;color:var(--muted-2);font-family:var(--mono);line-height:1.7}
+  .rail__foot a{color:var(--muted)}
+
+  /* ── Main ──────────────────────────────────────────────────── */
+  .main{display:flex;flex-direction:column;min-width:0;min-height:0}
+  .composer{padding:24px 34px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,rgba(21,22,31,.7),transparent)}
+  .composer__field{display:flex;gap:12px;align-items:flex-end;background:var(--ink-2);border:1px solid var(--line);border-radius:var(--r);padding:14px 14px 14px 18px;transition:border-color .15s}
+  .composer__field:focus-within{border-color:var(--gold-deep)}
+  textarea#prompt{flex:1;background:none;border:none;resize:none;color:var(--vellum);font-family:var(--sans);font-size:16px;line-height:1.55;min-height:30px;max-height:200px;outline:none}
+  textarea#prompt::placeholder{color:var(--muted-2)}
+  .refine{flex:none;font-family:var(--sans);font-weight:600;font-size:14px;color:#1a160b;background:linear-gradient(180deg,#EBC96E,var(--gold) 45%,var(--gold-deep));border:none;border-radius:10px;padding:12px 22px;cursor:pointer;box-shadow:0 1px 0 rgba(255,255,255,.25) inset,0 6px 18px -8px rgba(216,180,90,.7);transition:filter .15s,transform .05s;display:inline-flex;align-items:center;gap:9px}
+  .refine:hover{filter:brightness(1.06)}
+  .refine:active{transform:translateY(1px)}
+  .refine:disabled{filter:grayscale(.5) brightness(.8);cursor:not-allowed}
+  .refine__spin{width:13px;height:13px;border:2px solid rgba(26,22,11,.4);border-top-color:#1a160b;border-radius:50%;display:none;animation:spin .7s linear infinite}
+  .refine.is-running .refine__spin{display:inline-block}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .cancel{flex:none;font-family:var(--sans);font-weight:600;font-size:14px;color:var(--vellum);background:var(--ink-3);border:1px solid var(--line);border-radius:10px;padding:12px 18px;cursor:pointer;transition:.15s;display:none}
+  .cancel.show{display:inline-flex;align-items:center;gap:8px}
+  .cancel:hover{border-color:var(--rose);color:#E8B0B0}
+  .composer__row{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+  .composer__note{font-size:11.5px;color:var(--muted-2)}
+  .composer__note.err{color:var(--rose)}
+  .chips{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}
+  .chip{font-family:var(--mono);font-size:11px;color:var(--muted);background:var(--ink-2);border:1px solid var(--line-soft);border-radius:999px;padding:5px 11px;cursor:pointer;transition:.15s}
+  .chip:hover{color:var(--gold);border-color:var(--gold-deep)}
+
+  .tabs{display:flex;gap:4px;padding:14px 34px 0}
+  .tab{font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;padding:8px 12px 12px;cursor:pointer;transition:color .15s,border-color .15s}
+  .tab:hover{color:var(--vellum)}
+  .tab.is-active{color:var(--gold);border-color:var(--gold)}
+
+  .panel{flex:1;overflow-y:auto;min-height:0;padding:22px 34px 60px}
+  .panel[hidden]{display:none}
+
+  /* ── Pinned result bar (the answer, always reachable) ──────── */
+  .resultbar{position:sticky;top:0;z-index:5;margin:0 0 18px;padding:14px 17px;background:linear-gradient(180deg,rgba(216,180,90,.12),rgba(20,21,30,.97));backdrop-filter:blur(10px);border:1px solid var(--gold-deep);border-radius:var(--r);box-shadow:0 10px 34px -18px rgba(216,180,90,.45);animation:reveal .5s ease both}
+  .resultbar[hidden]{display:none}
+  .resultbar__top{display:flex;align-items:center;gap:12px;margin-bottom:9px;flex-wrap:wrap}
+  .resultbar__label{font-family:var(--display);font-weight:600;font-size:19px;color:var(--gold);display:flex;align-items:center;gap:9px}
+  .resultbar__meta{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.03em}
+  .resultbar__actions{margin-left:auto;display:flex;gap:8px}
+  .resultbar__body{font-size:15.5px;color:var(--vellum);line-height:1.62;white-space:pre-wrap;word-wrap:break-word}
+  .resultbar__body.is-collapsed{max-height:132px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 60%,transparent);mask-image:linear-gradient(180deg,#000 60%,transparent)}
+  .btn-mini{font-family:var(--mono);font-size:11.5px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line);border-radius:7px;padding:6px 11px;cursor:pointer;transition:.15s}
+  .btn-mini:hover{color:var(--gold);border-color:var(--gold-deep)}
+  .btn-mini--gold{color:#1a160b;background:var(--gold);border:1px solid var(--gold)}
+  .btn-mini--gold:hover{filter:brightness(1.06);color:#1a160b}
+
+  /* ── Stream ────────────────────────────────────────────────── */
+  .empty{margin-top:9vh;text-align:center;color:var(--muted-2)}
+  .empty__icon{width:54px;height:54px;margin:0 auto 18px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center}
+  .empty__icon span{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px rgba(216,180,90,.6)}
+  .empty__title{font-family:var(--display);font-size:24px;color:var(--vellum);margin-bottom:6px}
+  .empty p{font-size:13.5px;max-width:380px;margin:0 auto}
+
+  .phase{display:flex;align-items:baseline;gap:12px;margin:26px 2px 13px}
+  .phase:first-child{margin-top:4px}
+  .phase__eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
+  .phase__sub{font-family:var(--mono);font-size:11px;color:var(--muted-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .phase::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+  .voice{--c:#777;background:var(--ink-2);border:1px solid var(--line-soft);border-left:2px solid var(--c);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:14px 16px;margin-bottom:10px;animation:rise .35s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+  .voice__head{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .voice__dot{width:8px;height:8px;border-radius:50%;background:var(--c);box-shadow:0 0 8px -1px var(--c)}
+  .voice__name{font-weight:600;font-size:13.5px}
+  .voice__tag{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+  .verdict{margin-left:auto;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:2px 9px;border:1px solid currentColor}
+  .verdict--strong{color:var(--green)} .verdict--mixed{color:var(--gold)} .verdict--weak{color:var(--rose)}
+  .voice__body{font-size:14.5px;color:#DAD6C9;white-space:pre-wrap;word-wrap:break-word}
+  .voice__body.is-collapsed{max-height:210px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,#000 68%,transparent);mask-image:linear-gradient(180deg,#000 68%,transparent)}
+  .more{background:none;border:none;color:var(--gold);font-family:var(--mono);font-size:11.5px;cursor:pointer;padding:7px 0 1px;letter-spacing:.05em}
+  .more:hover{color:#EBC96E}
+  .voice--audit{background:transparent;border-style:dashed;opacity:.96}
+  .voice--audit .voice__body{font-family:var(--mono);font-size:12.5px;color:var(--muted);line-height:1.65}
+  .voice--audit .voice__name{font-weight:500;color:var(--vellum)}
+  .arrow{color:var(--muted-2);margin:0 5px}
+
+  .running{display:flex;align-items:center;gap:11px;color:var(--muted);font-size:13px;padding:9px 2px 4px;font-family:var(--mono)}
+  .running__pulse{width:9px;height:9px;border-radius:50%;background:var(--muted);animation:breathe 1.2s ease-in-out infinite}
+  .running--gold .running__pulse{background:var(--gold);box-shadow:0 0 12px rgba(216,180,90,.7)}
+  .running--gold{color:var(--gold)}
+  @keyframes breathe{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+
+  .marker{display:flex;align-items:center;gap:9px;color:var(--gold);font-family:var(--mono);font-size:12px;padding:10px 2px 2px;margin-top:4px}
+  .stopped{color:var(--muted);font-family:var(--mono);font-size:12.5px;padding:10px 2px}
+  @keyframes reveal{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .errcard{border:1px solid #6b3b3b;background:rgba(140,70,70,.12);border-radius:var(--r-sm);padding:14px 16px;color:#E8B0B0;font-size:13.5px;margin-top:10px}
+  .errcard b{color:#F0C4C4}
+  .errcard code{font-family:var(--mono);font-size:12px;color:var(--gold)}
+
+  /* ── API panel ─────────────────────────────────────────────── */
+  .api__lead{font-size:14px;color:var(--muted);max-width:640px;margin:2px 0 18px}
+  .api__lead b{color:var(--vellum);font-weight:600}
+  .endpoint{display:flex;align-items:center;gap:12px;background:var(--ink-2);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;margin-bottom:22px;flex-wrap:wrap}
+  .endpoint__k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-2)}
+  .endpoint__v{font-family:var(--mono);font-size:13.5px;color:var(--gold)}
+  .seg{display:flex;gap:4px;margin-bottom:14px}
+  .seg button{font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line-soft);border-radius:999px;padding:6px 14px;cursor:pointer;transition:.15s}
+  .seg button:hover{color:var(--vellum)}
+  .seg button.is-active{color:#1a160b;background:var(--gold);border-color:var(--gold)}
+  .code{position:relative;background:#0a0b11;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden}
+  .code pre{margin:0;padding:18px 16px;overflow-x:auto;font-family:var(--mono);font-size:13px;line-height:1.7;color:#CBC9BE}
+  .copy{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:11px;color:var(--muted);background:var(--ink-3);border:1px solid var(--line);border-radius:7px;padding:5px 10px;cursor:pointer;transition:.15s}
+  .copy:hover{color:var(--gold);border-color:var(--gold-deep)}
+  .api__more{margin-top:20px;font-size:13px;color:var(--muted)}
+  .api__more code{font-family:var(--mono);font-size:12px;color:var(--gold);background:var(--gold-soft);padding:2px 6px;border-radius:5px}
+
+  @media (max-width:920px){
+    .app{grid-template-columns:1fr;height:auto;overflow:visible}
+    .rail{position:static;height:auto;border-right:none;border-bottom:1px solid var(--line)}
+    .main{min-height:auto}
+    .panel{overflow:visible}
+    .composer,.tabs,.panel{padding-left:20px;padding-right:20px}
+    .chips{margin-left:0;width:100%}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+  /* ── Add-model button + remove + modal ─────────────────────── */
+  .add-model{margin-top:9px;width:100%;font-family:var(--mono);font-size:12px;color:var(--muted);background:var(--ink-3);border:1px dashed var(--line);border-radius:var(--r-sm);padding:9px;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:7px}
+  .add-model:hover{color:var(--gold);border-color:var(--gold-deep)}
+  .voice-row__rm{flex:none;width:22px;height:22px;border:none;background:none;color:var(--muted-2);font-size:16px;cursor:pointer;border-radius:6px;transition:.15s;line-height:1;padding:0}
+  .voice-row__rm:hover{color:var(--rose);background:rgba(224,138,138,.12)}
+
+  .modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(6,7,11,.66);backdrop-filter:blur(3px)}
+  .modal.show{display:flex;animation:reveal .25s ease both}
+  .modal__card{width:min(480px,100%);max-height:90vh;overflow-y:auto;background:var(--ink-2);border:1px solid var(--line);border-radius:var(--r);padding:24px;box-shadow:0 30px 80px -30px rgba(0,0,0,.8)}
+  .modal__title{font-family:var(--display);font-weight:600;font-size:25px;color:var(--vellum);margin:0 0 4px}
+  .modal__sub{font-size:12.5px;color:var(--muted);margin:0 0 20px;line-height:1.5}
+  .modal__sub code{font-family:var(--mono);font-size:11.5px;color:var(--gold)}
+  .field{margin-bottom:14px}
+  .field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);margin-bottom:6px}
+  .field input,.field select,.field textarea{width:100%;background:var(--ink-3);border:1px solid var(--line);border-radius:var(--r-sm);color:var(--vellum);font-family:var(--sans);font-size:14px;padding:10px 12px;outline:none;transition:border-color .15s}
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--gold-deep)}
+  .field input::placeholder{color:var(--muted-2)}
+  .field textarea{resize:vertical;min-height:52px;font-size:13px}
+  .field--key input{font-family:var(--mono);font-size:13px}
+  .field__hint{font-size:11px;color:var(--muted-2);margin-top:5px}
+  .modal__err{color:var(--rose);font-size:12.5px;margin:2px 0 12px;min-height:1px}
+  .modal__actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}
+  .btn-ghost{font-family:var(--sans);font-weight:600;font-size:14px;color:var(--muted);background:none;border:1px solid var(--line);border-radius:10px;padding:11px 18px;cursor:pointer;transition:.15s}
+  .btn-ghost:hover{color:var(--vellum);border-color:var(--muted-2)}
+  .btn-gold{font-family:var(--sans);font-weight:600;font-size:14px;color:#1a160b;background:linear-gradient(180deg,#EBC96E,var(--gold) 45%,var(--gold-deep));border:none;border-radius:10px;padding:11px 22px;cursor:pointer;transition:filter .15s}
+  .btn-gold:hover{filter:brightness(1.06)}
+  .btn-gold:disabled{filter:grayscale(.5) brightness(.8);cursor:not-allowed}
+
+  :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- ───────── Council / control rail ───────── -->
+  <aside class="rail">
+    <div class="brand">
+      <div class="brand__mark"><span class="gilt"></span>Theosis</div>
+      <div class="brand__tag">Một council các model audit chéo nhau thành một câu trả lời</div>
+      <span class="demo-pill" id="demoPill">Demo · model giả lập</span>
+    </div>
+
+    <div>
+      <div class="group__label">Council</div>
+      <div class="voices" id="voices"></div>
+      <button class="add-model" id="addModelBtn">＋ Thêm model</button>
+    </div>
+
+    <div>
+      <div class="group__label">Tổng hợp</div>
+      <div class="agg-row" id="aggRow">
+        <span class="agg-row__dot"></span>
+        <div class="agg-row__txt">
+          <div class="agg-row__name" id="aggName">aggregator</div>
+          <div class="agg-row__model" id="aggModel">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="group__label">Số vòng audit</div>
+      <div class="stepper">
+        <button id="rMinus" aria-label="Giảm">–</button>
+        <span class="stepper__val" id="rVal">2</span>
+        <button id="rPlus" aria-label="Tăng">+</button>
+      </div>
+      <div class="hint">Mỗi vòng: chấm chéo → tự vá. Nhiều vòng = kỹ hơn nhưng tốn hơn.</div>
+    </div>
+
+    <div class="rail__foot">
+      Theosis v1 · OpenAI-compatible<br/>
+      <a href="/health" target="_blank">/health</a> · <a href="/v1/models" target="_blank">/v1/models</a>
+    </div>
+  </aside>
+
+  <!-- ───────── Main ───────── -->
+  <main class="main">
+    <div class="composer">
+      <div class="composer__field">
+        <textarea id="prompt" rows="1" placeholder="Hỏi bất cứ điều gì. Theosis sẽ đưa qua council, audit chéo rồi tinh luyện thành một câu trả lời."></textarea>
+        <button class="refine" id="refine"><span class="refine__spin"></span><span id="refineLabel">Tinh luyện</span></button>
+        <button class="cancel" id="cancel">Dừng</button>
+      </div>
+      <div class="composer__row">
+        <span class="composer__note" id="note">Enter để gửi · Shift+Enter xuống dòng</span>
+        <span class="chips" id="chips">
+          <button class="chip" data-fill="Giải thích đệ quy cho người mới, kèm một ví dụ ngắn.">Giải thích</button>
+          <button class="chip" data-fill="Review đoạn code này và chỉ ra lỗi tiềm ẩn:&#10;&#10;def add(a, b):&#10;    return a - b">Review code</button>
+          <button class="chip" data-fill="So sánh REST và GraphQL: ưu nhược điểm và khi nào nên dùng cái nào.">So sánh</button>
+        </span>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab is-active" data-tab="stream">Luồng tinh luyện</button>
+      <button class="tab" data-tab="api">API</button>
+    </div>
+
+    <!-- Stream -->
+    <section class="panel" id="streamPanel">
+      <div class="resultbar" id="resultbar" hidden>
+        <div class="resultbar__top">
+          <span class="resultbar__label"><span class="gilt"></span>Câu trả lời tinh luyện</span>
+          <span class="resultbar__meta" id="resultMeta"></span>
+          <span class="resultbar__actions">
+            <button class="btn-mini" id="resultExpand" style="display:none">Mở rộng</button>
+            <button class="btn-mini btn-mini--gold" id="resultCopy">Sao chép</button>
+          </span>
+        </div>
+        <div class="resultbar__body" id="resultBody"></div>
+      </div>
+
+      <div id="stream">
+        <div class="empty" id="empty">
+          <div class="empty__icon"><span></span></div>
+          <div class="empty__title">Luồng đang trống</div>
+          <p>Gửi một câu hỏi để triệu tập council. Bạn sẽ thấy từng model trả lời, chấm chéo nhau, rồi hợp nhất thành câu trả lời mạ vàng.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- API -->
+    <section class="panel" id="apiPanel" hidden>
+      <p class="api__lead"><b>Theosis nói chuẩn OpenAI API.</b> Trỏ bất kỳ client nào vào endpoint dưới đây, đặt <code>model</code> = <code>theosis-v1</code>. Vì là OpenAI-compatible, bạn có thể dùng chính Theosis làm một slot bên trong một Theosis khác.</p>
+      <div class="endpoint"><span class="endpoint__k">Base URL</span><span class="endpoint__v" id="epUrl">—</span></div>
+      <div class="seg" id="seg">
+        <button class="is-active" data-snip="curl">curl</button>
+        <button data-snip="python">Python</button>
+        <button data-snip="openai">OpenAI SDK</button>
+      </div>
+      <div class="code">
+        <button class="copy" id="copyBtn">Sao chép</button>
+        <pre id="snippet">—</pre>
+      </div>
+      <p class="api__more">Tham số riêng của Theosis: thêm <code>"max_rounds": 3</code> vào body để chỉnh số vòng audit cho từng request.</p>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="modal">
+  <div class="modal__card">
+    <h2 class="modal__title">Thêm model</h2>
+    <p class="modal__sub">Mỗi model là một endpoint OpenAI-compatible. Key lưu ở <code>slots.local.yaml</code> (đã gitignore), không vào config.yaml.</p>
+    <div class="field">
+      <label>Nhà cung cấp</label>
+      <select id="mProvider"></select>
+    </div>
+    <div class="field"><label>Tên slot</label><input id="mName" placeholder="vd: opus, grok, llama-local" /></div>
+    <div class="field"><label>Model ID</label><input id="mModel" placeholder="vd: gpt-4o" /></div>
+    <div class="field"><label>Base URL</label><input id="mBase" placeholder="https://.../v1" /></div>
+    <div class="field field--key"><label>API key</label><input id="mKey" type="password" placeholder="dán key…" /><div class="field__hint" id="mKeyHint">Key lưu ở slots.local.yaml (gitignored).</div></div>
+    <div class="field"><label>System prompt (tuỳ chọn)</label><textarea id="mSystem" placeholder="vd: Bạn nghiêm ngặt, chính xác."></textarea></div>
+    <div class="modal__err" id="mErr"></div>
+    <div class="modal__actions">
+      <button class="btn-ghost" id="mCancel">Hủy</button>
+      <button class="btn-gold" id="mAdd">Thêm vào council</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const PALETTE = ["#A98AE0","#57C2B0","#E08AA0","#7FA8E0","#8FCB7A","#E0A85A"];
+  const GOLD = "#D8B45A";
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const $ = (s) => document.querySelector(s);
+  const el = (tag, cls, html) => { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; return e; };
+  const esc = (s) => (s ?? "").replace(/[&<>]/g, (m) => ({ "&":"&amp;", "<":"&lt;", ">":"&gt;" }[m]));
+
+  const stream = $("#stream");
+  const refineBtn = $("#refine");
+  const cancelBtn = $("#cancel");
+  const promptEl = $("#prompt");
+  const note = $("#note");
+
+  let colorOf = {};
+  let rounds = 2;
+  let busy = false;
+  let controller = null;     // AbortController của lần chạy hiện tại
+  let startedAt = 0;
+  let modelCount = 0;
+  let lastAnswer = "";
+
+  // ── auto-grow textarea ──
+  const grow = () => { promptEl.style.height = "auto"; promptEl.style.height = Math.min(promptEl.scrollHeight, 200) + "px"; };
+  promptEl.addEventListener("input", grow);
+
+  // ── example chips ──
+  document.querySelectorAll("#chips .chip").forEach((c) => c.onclick = () => { promptEl.value = c.dataset.fill; grow(); promptEl.focus(); });
+
+  // ── load config ──
+  async function loadConfig() {
+    try {
+      const c = await (await fetch("/api/config")).json();
+      (c.slots || []).forEach((s, i) => { colorOf[s.name] = PALETTE[i % PALETTE.length]; });
+      renderVoices(c.slots || []);
+      const agg = c.aggregator || {};
+      $("#aggName").innerHTML = esc(agg.name || "aggregator") + warnBadge(agg);
+      $("#aggModel").textContent = agg.model || "—";
+      rounds = (c.settings && c.settings.max_rounds) || 2;
+      setRounds(rounds);
+      if (c.demo) $("#demoPill").classList.add("show");
+    } catch (e) { renderVoices([]); }
+    setupApi();
+  }
+
+  const warnBadge = (s) => (!s.has_key && !s.mock)
+    ? ` <span class="warn" title="Chưa có API key — chạy thật sẽ lỗi">⚠</span>` : "";
+
+  function makeVoiceRow(s) {
+    const row = el("label", "voice-row");
+    row.style.setProperty("--c", colorOf[s.name] || GOLD);
+    const rm = s.runtime ? `<button type="button" class="voice-row__rm" data-rm="${esc(s.name)}" title="Xoá model">×</button>` : "";
+    row.innerHTML =
+      `<span class="voice-row__dot"></span>
+       <span class="voice-row__txt">
+         <span class="voice-row__name">${esc(s.name)}${warnBadge(s)}</span>
+         <span class="voice-row__model">${esc(s.model)}</span>
+       </span>
+       ${rm}
+       <span class="switch"><input type="checkbox" data-name="${esc(s.name)}" ${s.enabled ? "checked" : ""}/><span class="switch__track"></span></span>`;
+    const rmBtn = row.querySelector("[data-rm]");
+    if (rmBtn) rmBtn.onclick = (e) => { e.preventDefault(); e.stopPropagation(); removeSlot(s.name); };
+    return row;
+  }
+  function renderVoices(slots) {
+    const box = $("#voices");
+    box.innerHTML = "";
+    if (!slots.length) { box.appendChild(el("div", "hint", "Không tải được council.")); return; }
+    slots.forEach((s) => box.appendChild(makeVoiceRow(s)));
+  }
+
+  const enabledSlots = () => Array.from(document.querySelectorAll('#voices input:checked')).map((i) => i.dataset.name);
+
+  // ── rounds stepper ──
+  function setRounds(v) { rounds = Math.max(1, Math.min(4, v)); $("#rVal").textContent = rounds; $("#rMinus").disabled = rounds <= 1; $("#rPlus").disabled = rounds >= 4; }
+  $("#rMinus").onclick = () => setRounds(rounds - 1);
+  $("#rPlus").onclick = () => setRounds(rounds + 1);
+
+  // ── tabs ──
+  document.querySelectorAll(".tab").forEach((t) => t.onclick = () => {
+    document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("is-active", x === t));
+    $("#streamPanel").hidden = t.dataset.tab !== "stream";
+    $("#apiPanel").hidden = t.dataset.tab !== "api";
+  });
+
+  // ── stream rendering helpers ──
+  const scrollEnd = () => { const last = stream.lastElementChild; if (last) last.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" }); };
+
+  function phase(label, sub) {
+    const p = el("div", "phase");
+    p.innerHTML = `<span class="phase__eyebrow">${esc(label)}</span>` + (sub ? `<span class="phase__sub">${esc(sub)}</span>` : "");
+    stream.appendChild(p); scrollEnd(); return p;
+  }
+  function running(id, label, gold) {
+    const r = el("div", "running" + (gold ? " running--gold" : "")); r.id = id;
+    r.innerHTML = `<span class="running__pulse"></span>${esc(label)}`;
+    stream.appendChild(r); scrollEnd(); return r;
+  }
+  const clearRunning = (id) => { const r = document.getElementById(id); if (r) r.remove(); };
+
+  function collapseIfLong(body, limit) {
+    requestAnimationFrame(() => {
+      if (body.scrollHeight > limit) {
+        body.classList.add("is-collapsed");
+        const btn = el("button", "more", "Mở rộng");
+        btn.onclick = () => { const c = body.classList.toggle("is-collapsed"); btn.textContent = c ? "Mở rộng" : "Thu gọn"; };
+        body.after(btn);
+      }
+    });
+  }
+  function voiceCard(name, text, opts = {}) {
+    const card = el("div", "voice" + (opts.audit ? " voice--audit" : ""));
+    card.style.setProperty("--c", opts.color || colorOf[name] || GOLD);
+    const right = opts.badgeHtml || (opts.tag ? `<span class="voice__tag">${esc(opts.tag)}</span>` : "");
+    card.innerHTML = `<div class="voice__head"><span class="voice__dot"></span><span class="voice__name">${opts.titleHtml || esc(opts.title || name)}</span>${right}</div><div class="voice__body">${esc(text)}</div>`;
+    stream.appendChild(card);
+    collapseIfLong(card.querySelector(".voice__body"), 250);
+    scrollEnd();
+    return card;
+  }
+
+  function verdictBadge(crit) {
+    const m = /VERDICT:\s*(strong|mixed|weak)/i.exec(crit || "");
+    if (!m) return `<span class="voice__tag">audit</span>`;
+    const v = m[1].toLowerCase();
+    return `<span class="verdict verdict--${v}">${v}</span>`;
+  }
+
+  // ── pinned result ──
+  function showResult(text, cost) {
+    lastAnswer = text;
+    const body = $("#resultBody");
+    body.textContent = text;
+    body.classList.remove("is-collapsed");
+    const secs = Math.max(1, Math.round((performance.now() - startedAt) / 1000));
+    let meta = `${secs}s · ${modelCount} model · ${rounds} vòng`;
+    if (cost && cost.total_tokens) {
+      meta += ` · ${cost.total_tokens.toLocaleString()} tok`;
+      if (cost.usd && cost.usd > 0) meta += ` · ~$${cost.usd < 0.01 ? cost.usd.toFixed(4) : cost.usd.toFixed(3)}`;
+    }
+    $("#resultMeta").textContent = meta;
+    $("#resultbar").hidden = false;
+    requestAnimationFrame(() => {
+      if (body.scrollHeight > 150) { body.classList.add("is-collapsed"); $("#resultExpand").style.display = ""; $("#resultExpand").textContent = "Mở rộng"; }
+      else { $("#resultExpand").style.display = "none"; }
+    });
+  }
+  $("#resultExpand").onclick = () => { const b = $("#resultBody"); const c = b.classList.toggle("is-collapsed"); $("#resultExpand").textContent = c ? "Mở rộng" : "Thu gọn"; };
+  $("#resultCopy").onclick = async () => { try { await navigator.clipboard.writeText(lastAnswer); $("#resultCopy").textContent = "Đã chép ✓"; setTimeout(() => $("#resultCopy").textContent = "Sao chép", 1400); } catch (_) {} };
+
+  function handle(ev) {
+    switch (ev.type) {
+      case "fanout_start":
+        phase("Fan-out", (ev.slots || []).join("  ·  "));
+        running("run-fanout", "Council đang soạn câu trả lời…");
+        break;
+      case "fanout_done":
+        clearRunning("run-fanout");
+        Object.entries(ev.answers).forEach(([n, t]) => voiceCard(n, t, { tag: "v1" }));
+        break;
+      case "round_start":
+        phase(`Vòng ${ev.round + 1} · Audit chéo`);
+        running(`run-audit-${ev.round}`, "Đang chấm chéo theo rubric…");
+        break;
+      case "audit_done": {
+        clearRunning(`run-audit-${ev.round}`);
+        Object.entries(ev.critiques).forEach(([target, crit]) => {
+          const auditor = ev.pairs[target];
+          const titleHtml = `${esc(auditor)} <span class="arrow">▸ chấm</span> ${esc(target)}`;
+          voiceCard(auditor, crit, { audit: true, color: colorOf[auditor], titleHtml, badgeHtml: verdictBadge(crit) });
+        });
+        phase(`Vòng ${ev.round + 1} · Vá`);
+        running(`run-patch-${ev.round}`, "Các model đang tự sửa theo critique…");
+        break;
+      }
+      case "patch_done":
+        clearRunning(`run-patch-${ev.round}`);
+        Object.entries(ev.answers).forEach(([n, t]) => voiceCard(n, t, { tag: `v${ev.round + 2}` }));
+        break;
+      case "merge_start":
+        phase("Hội tụ");
+        running("run-merge", "Đang hợp nhất thành một câu trả lời…", true);
+        break;
+      case "done":
+        clearRunning("run-merge");
+        stream.appendChild(el("div", "marker", `<span>✦</span> Hội tụ hoàn tất — câu trả lời ở thanh trên cùng`));
+        scrollEnd();
+        showResult(ev.final, ev.cost);
+        break;
+      case "slot_error":
+        stream.appendChild(el("div", "stopped", `⚠ ${esc(ev.slot)} lỗi ở ${esc(ev.phase)} (${esc(ev.message)}) — bỏ qua, vòng vẫn chạy.`));
+        scrollEnd();
+        break;
+      case "converged":
+        stream.appendChild(el("div", "marker", `<span>✦</span> Hội tụ sớm (${Math.round((ev.similarity || 0) * 100)}% giống vòng trước) — dừng để tiết kiệm.`));
+        scrollEnd();
+        break;
+      case "budget_hit":
+        stream.appendChild(el("div", "stopped", `■ Chạm trần token (${(ev.tokens || 0).toLocaleString()}) — merge sớm.`));
+        scrollEnd();
+        break;
+      case "error":
+        document.querySelectorAll(".running").forEach((r) => r.remove());
+        stream.appendChild(el("div", "errcard", `<b>Không chạy được.</b> ${esc(ev.message)}<br/>Kiểm tra API key và base_url của slot trong <code>config.yaml</code>, hoặc thử lại với chế độ demo.`));
+        scrollEnd();
+        break;
+    }
+  }
+
+  // ── run ──
+  async function run() {
+    if (busy) return;
+    const prompt = promptEl.value.trim();
+    if (!prompt) { note.textContent = "Nhập câu hỏi trước đã."; note.classList.add("err"); return; }
+    const slots = enabledSlots();
+    if (!slots.length) { note.textContent = "Bật ít nhất một model trong council."; note.classList.add("err"); return; }
+    note.classList.remove("err"); note.textContent = "Enter để gửi · Shift+Enter xuống dòng";
+
+    busy = true; startedAt = performance.now(); modelCount = slots.length;
+    controller = new AbortController();
+    refineBtn.classList.add("is-running"); refineBtn.disabled = true;
+    cancelBtn.classList.add("show");
+    $("#refineLabel").textContent = "Đang tinh luyện…";
+    $("#resultbar").hidden = true;
+    $("#empty")?.remove();
+    stream.innerHTML = "";
+
+    try {
+      const resp = await fetch("/api/run", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt, max_rounds: rounds, enabled_slots: slots }),
+        signal: controller.signal,
+      });
+      if (!resp.ok || !resp.body) throw new Error("HTTP " + resp.status);
+      const reader = resp.body.getReader();
+      const dec = new TextDecoder();
+      let buf = "";
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, { stream: true });
+        let idx;
+        while ((idx = buf.indexOf("\n")) >= 0) {
+          const line = buf.slice(0, idx).trim();
+          buf = buf.slice(idx + 1);
+          if (line) { try { handle(JSON.parse(line)); } catch (_) {} }
+        }
+      }
+    } catch (e) {
+      document.querySelectorAll(".running").forEach((r) => r.remove());
+      if (e.name === "AbortError") {
+        stream.appendChild(el("div", "stopped", "■ Đã dừng."));
+      } else {
+        stream.appendChild(el("div", "errcard", `<b>Mất kết nối tới server.</b> ${esc(String(e.message || e))}`));
+      }
+      scrollEnd();
+    } finally {
+      busy = false; controller = null;
+      refineBtn.classList.remove("is-running"); refineBtn.disabled = false;
+      cancelBtn.classList.remove("show");
+      $("#refineLabel").textContent = "Tinh luyện";
+    }
+  }
+
+  refineBtn.onclick = run;
+  cancelBtn.onclick = () => { if (controller) controller.abort(); };
+  promptEl.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); run(); } });
+
+  // ── API snippets ──
+  let snippets = {};
+  function setupApi() {
+    const origin = window.location.origin;
+    $("#epUrl").textContent = origin + "/v1";
+    snippets = {
+      curl:
+`curl ${origin}/v1/chat/completions \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "model": "theosis-v1",
+    "messages": [{"role": "user", "content": "Xin chào Theosis"}]
+  }'`,
+      python:
+`import requests
+
+r = requests.post("${origin}/v1/chat/completions", json={
+    "model": "theosis-v1",
+    "messages": [{"role": "user", "content": "Xin chào Theosis"}],
+    # "max_rounds": 3,   # tham số riêng (tuỳ chọn)
+})
+print(r.json()["choices"][0]["message"]["content"])`,
+      openai:
+`from openai import OpenAI
+
+client = OpenAI(base_url="${origin}/v1", api_key="not-needed")
+r = client.chat.completions.create(
+    model="theosis-v1",
+    messages=[{"role": "user", "content": "Xin chào Theosis"}],
+)
+print(r.choices[0].message.content)`,
+    };
+    showSnippet("curl");
+  }
+  function showSnippet(key) {
+    $("#snippet").textContent = snippets[key] || "";
+    document.querySelectorAll("#seg button").forEach((b) => b.classList.toggle("is-active", b.dataset.snip === key));
+  }
+  document.querySelectorAll("#seg button").forEach((b) => b.onclick = () => showSnippet(b.dataset.snip));
+  $("#copyBtn").onclick = async () => { try { await navigator.clipboard.writeText($("#snippet").textContent); $("#copyBtn").textContent = "Đã chép ✓"; setTimeout(() => $("#copyBtn").textContent = "Sao chép", 1400); } catch (_) {} };
+
+  // ── add / remove model ──
+  const PROVIDERS = {
+    "OpenAI": { base: "https://api.openai.com/v1", model: "gpt-4o" },
+    "Anthropic": { base: "https://api.anthropic.com/v1", model: "claude-opus-4-8" },
+    "OpenRouter": { base: "https://openrouter.ai/api/v1", model: "anthropic/claude-3.5-sonnet" },
+    "DeepSeek": { base: "https://api.deepseek.com/v1", model: "deepseek-chat" },
+    "xAI (Grok)": { base: "https://api.x.ai/v1", model: "grok-4" },
+    "Groq": { base: "https://api.groq.com/openai/v1", model: "llama-3.3-70b-versatile" },
+    "Ollama (local)": { base: "http://localhost:11434/v1", model: "llama3", local: true },
+    "Tùy chỉnh": { base: "", model: "" },
+  };
+  function initProviders() {
+    const sel = $("#mProvider");
+    sel.innerHTML = Object.keys(PROVIDERS).map((k) => `<option>${k}</option>`).join("");
+    sel.onchange = applyProvider;
+  }
+  function applyProvider() {
+    const p = PROVIDERS[$("#mProvider").value] || {};
+    $("#mBase").value = p.base || "";
+    if (p.model) $("#mModel").value = p.model;
+    $("#mKeyHint").textContent = p.local ? "Model local — không cần key." : "Key lưu ở slots.local.yaml (gitignored).";
+  }
+  function openModal() { $("#mErr").textContent = ""; $("#modal").classList.add("show"); applyProvider(); $("#mName").focus(); }
+  function closeModal() { $("#modal").classList.remove("show"); }
+  $("#addModelBtn").onclick = openModal;
+  $("#mCancel").onclick = closeModal;
+  $("#modal").onclick = (e) => { if (e.target === $("#modal")) closeModal(); };
+
+  async function addSlot() {
+    const name = $("#mName").value.trim();
+    const model = $("#mModel").value.trim();
+    const base_url = $("#mBase").value.trim();
+    const api_key = $("#mKey").value.trim();
+    const system = $("#mSystem").value.trim();
+    const err = $("#mErr");
+    if (!name || !model || !base_url) { err.textContent = "Cần tên, model và base URL."; return; }
+    $("#mAdd").disabled = true;
+    try {
+      const r = await fetch("/api/slots", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, model, base_url, api_key, system, enabled: true }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) { err.textContent = data.detail || "Không thêm được."; return; }
+      const s = data.slot;
+      colorOf[s.name] = PALETTE[Object.keys(colorOf).length % PALETTE.length];
+      $("#voices").appendChild(makeVoiceRow(s));
+      ["#mName", "#mModel", "#mKey", "#mSystem"].forEach((id) => { $(id).value = ""; });
+      closeModal();
+    } catch (e) {
+      err.textContent = "Lỗi kết nối: " + (e.message || e);
+    } finally {
+      $("#mAdd").disabled = false;
+    }
+  }
+  $("#mAdd").onclick = addSlot;
+
+  async function removeSlot(name) {
+    try {
+      const r = await fetch("/api/slots/" + encodeURIComponent(name), { method: "DELETE" });
+      if (r.ok) {
+        const input = document.querySelector(`#voices input[data-name="${CSS.escape(name)}"]`);
+        const row = input ? input.closest(".voice-row") : null;
+        if (row) row.remove();
+      }
+    } catch (_) {}
+  }
+
+  initProviders();
+  loadConfig();
+})();
+</script>
+</body>
+</html>
