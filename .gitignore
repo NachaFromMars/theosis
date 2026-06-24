@@ -18,3 +18,7 @@ slots.local.yaml
 dist/
 build/
 *.egg-info/
+
+# Immune memory (local, content-free rules + metrics)
+memory.local.json
+metrics.local.jsonl
