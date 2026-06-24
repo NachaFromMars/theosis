@@ -15,6 +15,7 @@ def main() -> None:
     ap.add_argument("prompt", nargs="?", help='câu hỏi (bỏ trống để đọc từ stdin)')
     ap.add_argument("--rounds", type=int, default=None, help="số vòng audit (mặc định theo config)")
     ap.add_argument("--budget", type=int, default=None, help="trần token; vượt thì merge sớm")
+    ap.add_argument("--router", action="store_true", help="tự định tuyến: model chọn model + chiến lược + vòng")
     ap.add_argument("--json", action="store_true", help="in cả trail dạng JSON")
     args = ap.parse_args()
 
@@ -26,7 +27,8 @@ def main() -> None:
     rounds = args.rounds if args.rounds is not None else int(settings.get("max_rounds", 2))
 
     final, trail = asyncio.run(
-        theosis(prompt, slots, aggregator, max_rounds=rounds, max_tokens_budget=args.budget)
+        theosis(prompt, slots, aggregator, max_rounds=rounds,
+                max_tokens_budget=args.budget, use_router=args.router)
     )
 
     if args.json:
