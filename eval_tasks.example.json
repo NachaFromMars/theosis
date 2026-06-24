@@ -1,0 +1,8 @@
+{
+  "tasks": [
+    {"prompt": "2 + 2 bằng mấy?", "task_type": "math", "expect_contains": "4"},
+    {"prompt": "Thủ đô của Pháp là gì?", "task_type": "factual", "expect_contains": "Paris"},
+    {"prompt": "Viết hàm Python tính giai thừa của n.", "task_type": "code", "expect_contains": "def"},
+    {"prompt": "Giải thích ngắn gọn đệ quy là gì.", "task_type": "reasoning"}
+  ]
+}
