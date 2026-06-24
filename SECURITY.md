@@ -11,6 +11,15 @@ Theosis được thiết kế làm **công cụ chạy local, một người dù
 - `.env` cũng đã được `.gitignore` chặn.
 - Trước khi publish/clone công khai: kiểm tra `git status` không có `.env` hay `slots.local.yaml`.
 
+## Executor — chạy code (opt-in, mặc định TẮT)
+
+Khi bật `use_executor` (qua `config.yaml`, tham số API, hoặc toggle trên UI), Theosis sẽ **chạy code Python trích từ câu trả lời của model** để lấy ground truth cho audit.
+
+- Tiến trình con chạy ở **Python isolated mode** (`-I`), trong **thư mục tạm**, có **timeout** và **giới hạn CPU/RAM** (POSIX).
+- Nhưng **chạy code không tin cậy luôn có rủi ro** (đọc/ghi file trong quyền của bạn, gọi mạng…). Sandbox này là *best-effort*, **không phải** cô lập tuyệt đối.
+- **Chỉ bật trên máy/tài khoản bạn kiểm soát.** Muốn an toàn hơn: chạy Theosis trong container/VM, hoặc tắt mạng cho tiến trình con ở môi trường triển khai.
+- Mặc định **tắt** — không tự chạy gì nếu bạn không bật.
+
 ## Báo cáo lỗ hổng
 
 Nếu phát hiện lỗ hổng bảo mật, vui lòng **không** mở issue công khai. Liên hệ riêng qua kênh của repo (GitHub Security Advisory hoặc email của maintainer). Mình sẽ phản hồi và phối hợp vá trước khi công bố.
