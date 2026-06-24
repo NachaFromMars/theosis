@@ -95,6 +95,39 @@
   .composer__row{display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
   .composer__note{font-size:11.5px;color:var(--muted-2)}
   .composer__note.err{color:var(--rose)}
+  .attach{flex:none;background:none;border:1px solid var(--line);border-radius:10px;width:40px;height:40px;font-size:17px;cursor:pointer;color:var(--muted);transition:all .15s;align-self:flex-end}
+  .attach:hover{border-color:var(--gold);color:var(--gold)}
+  .attach-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+  .fchip{display:inline-flex;align-items:center;gap:8px;background:var(--ink-3);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:12px;color:var(--vellum);max-width:280px}
+  .fchip__kind{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);border-radius:10px;padding:1px 6px;flex:none}
+  .fchip__name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .fchip__x{cursor:pointer;color:var(--muted);font-size:15px;line-height:1;flex:none}
+  .fchip__x:hover{color:var(--rose)}
+  .fchip.warn{border-color:var(--rose)}
+  .attachments-line{font-family:var(--mono);font-size:11px;color:var(--green);margin:8px 0;padding-left:15px;position:relative}
+  .attachments-line::before{content:"📎";position:absolute;left:-2px}
+  .artifact-card{display:flex;align-items:center;gap:12px;background:linear-gradient(180deg,rgba(216,180,90,.1),transparent);border:1px solid var(--gold);border-radius:var(--r-sm);padding:11px 14px;margin:8px 0}
+  .artifact-card__ic{font-size:20px}
+  .artifact-card__meta{flex:1;min-width:0}
+  .artifact-card__name{font-size:13px;color:var(--vellum);font-weight:600}
+  .artifact-card__sub{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:2px}
+  .artifact-card__dl{flex:none;font-family:var(--mono);font-size:11px;color:var(--ink);background:var(--gold);border:none;border-radius:7px;padding:6px 13px;cursor:pointer;text-decoration:none}
+  .artifact-card__dl:hover{background:var(--gold-deep)}
+  .user-bubble{align-self:flex-end;max-width:80%;margin:4px 0 14px auto;background:var(--gold);color:var(--ink);padding:11px 16px;border-radius:16px 16px 4px 16px;font-size:14px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+  .turn-sep{height:1px;background:var(--line);margin:26px 0 20px;opacity:.6}
+  .newchat{flex:none;background:none;border:1px solid var(--line);border-radius:8px;padding:5px 12px;font-size:11.5px;color:var(--muted);cursor:pointer;transition:all .15s}
+  .newchat:hover{border-color:var(--gold);color:var(--gold)}
+  .box-new{float:right;background:none;border:1px solid var(--line);border-radius:6px;width:22px;height:20px;font-size:13px;line-height:1;color:var(--muted);cursor:pointer;padding:0}
+  .box-new:hover{border-color:var(--gold);color:var(--gold)}
+  .box-list{display:flex;flex-direction:column;gap:3px;max-height:210px;overflow-y:auto}
+  .box-row{display:flex;align-items:center;gap:6px;padding:7px 9px;border-radius:7px;cursor:pointer;font-size:12.5px;color:var(--muted);transition:background .12s,color .12s}
+  .box-row:hover{background:var(--ink-3);color:var(--vellum)}
+  .box-row.active{background:var(--ink-3);color:var(--gold);border-left:2px solid var(--gold)}
+  .box-row__t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .box-row__x{opacity:0;font-size:14px;flex:none;line-height:1}
+  .box-row:hover .box-row__x{opacity:.55}
+  .box-row__x:hover{opacity:1;color:var(--rose)}
+  .assistant-bubble{align-self:flex-start;max-width:85%;margin:4px auto 14px 0;background:var(--ink-2);border:1px solid var(--line);color:var(--vellum);padding:11px 16px;border-radius:16px 16px 16px 4px;font-size:14px;line-height:1.6;white-space:pre-wrap;word-break:break-word}
   .chips{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}
   .chip{font-family:var(--mono);font-size:11px;color:var(--muted);background:var(--ink-2);border:1px solid var(--line-soft);border-radius:999px;padding:5px 11px;cursor:pointer;transition:.15s}
   .chip:hover{color:var(--gold);border-color:var(--gold-deep)}
@@ -218,6 +251,106 @@
   .btn-gold:hover{filter:brightness(1.06)}
   .btn-gold:disabled{filter:grayscale(.5) brightness(.8);cursor:not-allowed}
 
+  .strat-select{width:100%;padding:9px 11px;background:var(--ink-3);border:1px solid var(--line-soft);border-radius:var(--r-sm);color:var(--vellum);font-family:var(--sans);font-size:13px;cursor:pointer;appearance:none}
+  .strat-select:focus{border-color:var(--gold)}
+
+  .route-card{background:linear-gradient(180deg,rgba(201,162,39,.10),rgba(201,162,39,.03));border:1px solid var(--gold);border-radius:var(--r-sm);padding:11px 13px;margin:2px 0}
+  .route-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-family:var(--mono);font-size:11.5px;color:var(--gold)}
+  .route-mark{font-size:14px}
+  .route-meta{color:var(--muted);letter-spacing:.02em}
+  .route-slots{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .route-chip{font-family:var(--mono);font-size:11px;padding:2px 9px;border:1px solid var(--gold);border-radius:20px;color:var(--gold)}
+  .route-reason{font-size:12px;color:var(--muted);margin-top:7px;font-style:italic}
+
+  .mem-card{background:linear-gradient(180deg,rgba(143,203,122,.12),rgba(143,203,122,.03));border:1px solid var(--green);border-radius:var(--r-sm);padding:11px 13px;margin:2px 0}
+  .mem-head{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--green)}
+  .mem-list{margin-top:8px;display:flex;flex-direction:column;gap:5px}
+  .mem-item{font-size:12.5px;color:var(--vellum);padding-left:15px;position:relative;line-height:1.45}
+  .mem-item::before{content:"›";position:absolute;left:3px;color:var(--green)}
+  .count-badge{font-family:var(--mono);font-size:10px;color:var(--green);border:1px solid var(--green);border-radius:20px;padding:0 7px;margin-left:7px;opacity:.85}
+  .teach{margin-top:13px;border-top:1px dashed var(--line);padding-top:12px}
+  .teach>summary{font-family:var(--mono);font-size:11px;color:var(--muted);cursor:pointer;list-style:none;user-select:none}
+  .teach>summary::-webkit-details-marker{display:none}
+  .teach>summary::before{content:"✎ ";color:var(--green)}
+  .teach>summary:hover{color:var(--green)}
+  .teach__box{margin-top:10px;display:flex;flex-direction:column;gap:9px}
+  .teach textarea{width:100%;min-height:56px;resize:vertical;background:var(--ink-3);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-family:var(--sans);font-size:13px;color:var(--vellum);outline:none}
+  .teach textarea:focus{border-color:var(--green)}
+  .teach__act{display:flex;align-items:center;gap:11px}
+  .teach__hint{font-size:11px;color:var(--muted)}
+
+  .learn-card{background:linear-gradient(180deg,rgba(216,180,90,.14),rgba(216,180,90,.03));border:1px solid var(--gold);border-radius:var(--r-sm);padding:11px 13px;margin:2px 0}
+  .learn-head{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;color:var(--gold)}
+  .learn-rule{font-size:12.5px;color:var(--vellum);margin-top:7px;padding-left:15px;position:relative;line-height:1.45}
+  .learn-rule::before{content:"✦";position:absolute;left:2px;color:var(--gold)}
+  .learn-src{font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:5px}
+
+  .mem-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .mem-bar__title{font-family:var(--display);font-size:20px;color:var(--vellum);display:flex;align-items:center}
+  .mem-bar__actions{display:flex;gap:8px}
+  .mem-bar__hint{font-size:12.5px;color:var(--muted);margin:8px 0 16px;line-height:1.5;max-width:72ch}
+  .rule-list{display:flex;flex-direction:column;gap:11px}
+  .rule-empty{font-size:13px;color:var(--muted);font-style:italic;padding:24px 0;text-align:center}
+  .rule{border:1px solid var(--line);border-radius:var(--r-sm);padding:13px 15px;background:var(--ink-2)}
+  .rule.unverified{border-left:3px solid var(--gold)}
+  .rule.verified{border-left:3px solid var(--green)}
+  .rule__top{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+  .rule__guide{font-size:14px;color:var(--vellum);line-height:1.5;flex:1}
+  .rule__badge{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:20px;white-space:nowrap;flex:none}
+  .rule__badge.v{color:var(--green);border:1px solid var(--green)}
+  .rule__badge.u{color:var(--gold);border:1px solid var(--gold)}
+  .rule__meta{font-family:var(--mono);font-size:10.5px;color:var(--muted);margin-top:9px;display:flex;gap:12px;flex-wrap:wrap}
+  .rule__acts{display:flex;gap:8px;margin-top:11px;flex-wrap:wrap}
+  .rule__edit{width:100%;margin-top:10px;min-height:52px;resize:vertical;background:var(--ink-3);border:1px solid var(--line);border-radius:7px;padding:8px 10px;font-family:var(--sans);font-size:13px;color:var(--vellum);outline:none}
+  .rule__edit:focus{border-color:var(--gold)}
+  .rbtn{font-family:var(--mono);font-size:11px;padding:4px 11px;border-radius:7px;border:1px solid var(--line);background:none;color:var(--muted);cursor:pointer;transition:all .15s}
+  .rbtn:hover{color:var(--vellum);border-color:var(--muted)}
+  .rbtn--v{color:var(--green);border-color:rgba(143,203,122,.4)}
+  .rbtn--v:hover{background:rgba(143,203,122,.12);border-color:var(--green)}
+  .rbtn--del{color:var(--rose);border-color:rgba(224,138,138,.35)}
+  .rbtn--del:hover{background:rgba(224,138,138,.1);border-color:var(--rose)}
+  .rule.demoted{opacity:.62}
+  .rule.demoted .rule__guide{text-decoration:line-through;text-decoration-color:var(--rose)}
+  .rule__badges{display:flex;flex-direction:column;gap:5px;align-items:flex-end;flex:none}
+  .rule__badge.d{color:var(--rose);border:1px solid var(--rose)}
+  .rule__score{color:var(--green)}
+  .rule__score.neg{color:var(--rose)}
+
+  .stat-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:20px}
+  .stat-card{border:1px solid var(--line);border-radius:var(--r-sm);padding:14px 15px;background:var(--ink-2)}
+  .stat-card__n{font-family:var(--display);font-size:30px;line-height:1;color:var(--gold)}
+  .stat-card__l{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--muted);margin-top:7px;text-transform:uppercase}
+  .stat-sec{margin:18px 0}
+  .stat-sec__h{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--vellum);margin-bottom:10px}
+  .health{display:flex;height:22px;border-radius:6px;overflow:hidden;border:1px solid var(--line)}
+  .health span{display:block}
+  .health .h-good{background:rgba(143,203,122,.55)}
+  .health .h-neu{background:rgba(120,120,130,.4)}
+  .health .h-bad{background:rgba(224,138,138,.55)}
+  .health-legend{display:flex;gap:16px;margin-top:8px;font-family:var(--mono);font-size:10.5px;color:var(--muted)}
+  .health-legend i{font-style:normal;display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+  .srow{display:flex;align-items:center;gap:10px;margin:5px 0;font-size:12.5px;color:var(--vellum)}
+  .srow__bar{height:9px;border-radius:5px;background:var(--gold);opacity:.75;flex:none}
+  .srow__k{font-family:var(--mono);font-size:11px;color:var(--muted);min-width:128px}
+  .srow__v{font-family:var(--mono);font-size:11px;color:var(--muted)}
+  .toprow{display:flex;gap:10px;align-items:baseline;margin:5px 0;font-size:12.5px;color:var(--vellum)}
+  .toprow__u{font-family:var(--mono);color:var(--gold);min-width:38px;text-align:right}
+  .chart{display:flex;align-items:flex-end;gap:4px;height:90px;padding-top:6px}
+  .chart__col{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;min-width:0}
+  .chart__bar{width:100%;max-width:26px;background:var(--gold);opacity:.7;border-radius:3px 3px 0 0;min-height:2px}
+  .chart__bar.green{background:var(--green)}
+  .chart__lbl{font-family:var(--mono);font-size:8.5px;color:var(--muted);white-space:nowrap;transform:rotate(-45deg);transform-origin:top right;margin-top:4px}
+  .chart__val{font-family:var(--mono);font-size:9px;color:var(--muted)}
+  .stat-meta{font-family:var(--mono);font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6}
+
+  .exec-row{display:flex;align-items:center;gap:11px;padding:10px 12px;background:var(--ink-3);border:1px solid var(--line-soft);border-radius:var(--r-sm);cursor:pointer}
+  .exec-row__txt{flex:1;min-width:0}
+  .exec-row__name{font-size:13px;font-weight:600;color:var(--vellum)}
+  .exec-row__warn{display:block;font-family:var(--mono);font-size:10px;color:var(--gold);margin-top:2px;line-height:1.4}
+  .evidence{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;padding:7px 2px;color:var(--muted)}
+  .evidence.pass{color:var(--green)}
+  .evidence.fail{color:var(--rose)}
+
   :focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:4px}
 </style>
 </head>
@@ -229,6 +362,11 @@
       <div class="brand__mark"><span class="gilt"></span>Theosis</div>
       <div class="brand__tag">Một council các model audit chéo nhau thành một câu trả lời</div>
       <span class="demo-pill" id="demoPill">Demo · model giả lập</span>
+    </div>
+
+    <div>
+      <div class="group__label">Hội thoại <button class="box-new" id="boxNew" title="Hội thoại mới">＋</button></div>
+      <div class="box-list" id="boxList"></div>
     </div>
 
     <div>
@@ -258,6 +396,84 @@
       <div class="hint">Mỗi vòng: chấm chéo → tự vá. Nhiều vòng = kỹ hơn nhưng tốn hơn.</div>
     </div>
 
+    <div>
+      <div class="group__label">Định tuyến</div>
+      <label class="exec-row">
+        <span class="exec-row__txt">
+          <span class="exec-row__name">Tự định tuyến (router)</span>
+          <span class="exec-row__warn" style="color:var(--muted)">model tự chọn model + chiến lược + vòng cho mỗi câu</span>
+        </span>
+        <span class="switch"><input type="checkbox" id="routerToggle"/><span class="switch__track"></span></span>
+      </label>
+    </div>
+
+    <div>
+      <div class="group__label">Ký ức miễn dịch <span class="count-badge" id="memCount" style="display:none">0</span></div>
+      <label class="exec-row">
+        <span class="exec-row__txt">
+          <span class="exec-row__name">Dùng ký ức</span>
+          <span class="exec-row__warn" style="color:var(--muted)">chèn bài học đã rút từ lỗi trước (rule trừu tượng, content-free)</span>
+        </span>
+        <span class="switch"><input type="checkbox" id="memToggle"/><span class="switch__track"></span></span>
+      </label>
+      <label class="exec-row">
+        <span class="exec-row__txt">
+          <span class="exec-row__name">Tự học từ lỗi</span>
+          <span class="exec-row__warn" style="color:var(--muted)">executor bắt câu SAI → tự rút rule (cần bật executor)</span>
+        </span>
+        <span class="switch"><input type="checkbox" id="autoLearnToggle"/><span class="switch__track"></span></span>
+      </label>
+      <label class="exec-row">
+        <span class="exec-row__txt">
+          <span class="exec-row__name">Chỉ dùng rule đã duyệt</span>
+          <span class="exec-row__warn" style="color:var(--muted)">cổng chất lượng — bỏ qua rule chưa duyệt khi tiêm</span>
+        </span>
+        <span class="switch"><input type="checkbox" id="verifiedOnlyToggle"/><span class="switch__track"></span></span>
+      </label>
+    </div>
+
+    <div>
+      <div class="group__label">Hội thoại</div>
+      <label class="exec-row">
+        <span class="exec-row__txt">
+          <span class="exec-row__name">Tóm tắt hội thoại dài</span>
+          <span class="exec-row__warn" style="color:var(--muted)">lịch sử dài → nén lượt cũ thành tóm tắt (chặn phình token)</span>
+        </span>
+        <span class="switch"><input type="checkbox" id="summarizeToggle"/><span class="switch__track"></span></span>
+      </label>
+    </div>
+
+    <div>
+      <div class="group__label">Chiến lược chấm</div>
+      <select id="stratSelect" class="strat-select">
+        <option value="round_robin">Vòng tròn (round-robin)</option>
+        <option value="all_vs_all">Tất cả chấm tất cả</option>
+        <option value="star">Một giám khảo (star)</option>
+      </select>
+      <div class="hint">round-robin: mỗi câu bị "Người chấm / câu" model soi · all-vs-all: mọi model soi nhau (kỹ, tốn) · star: 1 model soi hết.</div>
+    </div>
+
+    <div>
+      <div class="group__label">Người chấm / câu</div>
+      <div class="stepper">
+        <button id="aMinus" aria-label="Giảm">–</button>
+        <span class="stepper__val" id="aVal">1</span>
+        <button id="aPlus" aria-label="Tăng">+</button>
+      </div>
+      <div class="hint">M-of-N: mỗi câu trả lời bị bao nhiêu model soi. Tối đa = số model − 1.</div>
+    </div>
+
+    <div>
+      <div class="group__label">Kiểm chứng</div>
+      <label class="exec-row">
+        <span class="exec-row__txt">
+          <span class="exec-row__name">Chạy code để kiểm chứng</span>
+          <span class="exec-row__warn">⚠ chạy code do model sinh — chỉ bật trên máy bạn tin</span>
+        </span>
+        <span class="switch"><input type="checkbox" id="execToggle"/><span class="switch__track"></span></span>
+      </label>
+    </div>
+
     <div class="rail__foot">
       Theosis v1 · OpenAI-compatible<br/>
       <a href="/health" target="_blank">/health</a> · <a href="/v1/models" target="_blank">/v1/models</a>
@@ -268,12 +484,16 @@
   <main class="main">
     <div class="composer">
       <div class="composer__field">
+        <button class="attach" id="attachBtn" title="Đính kèm file (mọi định dạng)">📎</button>
+        <input type="file" id="fileInput" multiple hidden />
         <textarea id="prompt" rows="1" placeholder="Hỏi bất cứ điều gì. Theosis sẽ đưa qua council, audit chéo rồi tinh luyện thành một câu trả lời."></textarea>
         <button class="refine" id="refine"><span class="refine__spin"></span><span id="refineLabel">Tinh luyện</span></button>
         <button class="cancel" id="cancel">Dừng</button>
       </div>
+      <div class="attach-row" id="attachRow" hidden></div>
       <div class="composer__row">
-        <span class="composer__note" id="note">Enter để gửi · Shift+Enter xuống dòng</span>
+        <span class="composer__note" id="note">Enter để gửi · Shift+Enter xuống dòng · 📎 đính kèm cho cả council đọc</span>
+        <button class="newchat" id="newChat" title="Xoá lịch sử, bắt đầu cuộc trò chuyện mới">＋ Trò chuyện mới</button>
         <span class="chips" id="chips">
           <button class="chip" data-fill="Giải thích đệ quy cho người mới, kèm một ví dụ ngắn.">Giải thích</button>
           <button class="chip" data-fill="Review đoạn code này và chỉ ra lỗi tiềm ẩn:&#10;&#10;def add(a, b):&#10;    return a - b">Review code</button>
@@ -284,6 +504,8 @@
 
     <div class="tabs">
       <button class="tab is-active" data-tab="stream">Luồng tinh luyện</button>
+      <button class="tab" data-tab="memory">Ký ức</button>
+      <button class="tab" data-tab="stats">Thống kê</button>
       <button class="tab" data-tab="api">API</button>
     </div>
 
@@ -299,6 +521,16 @@
           </span>
         </div>
         <div class="resultbar__body" id="resultBody"></div>
+        <details class="teach" id="teach">
+          <summary>Dạy bài học — câu này chưa đúng?</summary>
+          <div class="teach__box">
+            <textarea id="teachInput" placeholder="Sai ở đâu / cần sửa gì? Theosis sẽ rút thành một bài học CHUNG (không lưu nội dung gốc) để lần sau tránh."></textarea>
+            <div class="teach__act">
+              <button class="btn-mini btn-mini--gold" id="teachBtn">Ghi nhớ bài học</button>
+              <span class="teach__hint" id="teachHint">chỉ rule trừu tượng được lưu — content-free</span>
+            </div>
+          </div>
+        </details>
       </div>
 
       <div id="stream">
@@ -324,6 +556,29 @@
         <pre id="snippet">—</pre>
       </div>
       <p class="api__more">Tham số riêng của Theosis: thêm <code>"max_rounds": 3</code> vào body để chỉnh số vòng audit cho từng request.</p>
+    </section>
+
+    <!-- Memory / review -->
+    <section class="panel" id="memoryPanel" hidden>
+      <div class="mem-bar">
+        <div class="mem-bar__title">Ký ức miễn dịch <span class="count-badge" id="memCount2">0</span></div>
+        <div class="mem-bar__actions">
+          <button class="btn-mini" id="memRefresh">Tải lại</button>
+          <button class="btn-mini" id="memClear">Xoá tất cả</button>
+        </div>
+      </div>
+      <p class="mem-bar__hint">Rule <b>đã duyệt</b> ✓ mới được tiêm khi bật "Chỉ dùng rule đã duyệt". Rule auto-learn vào ở trạng thái <b>chưa duyệt</b> — hãy xem, sửa, rồi duyệt hoặc xoá.</p>
+      <div id="ruleList" class="rule-list"></div>
+    </section>
+
+    <!-- Stats / dashboard -->
+    <section class="panel" id="statsPanel" hidden>
+      <div class="mem-bar">
+        <div class="mem-bar__title">Thống kê ký ức</div>
+        <div class="mem-bar__actions"><button class="btn-mini" id="statsRefresh">Tải lại</button></div>
+      </div>
+      <p class="mem-bar__hint">Tổng quan sức khỏe ký ức theo thời gian. Mọi số liệu đều content-free (chỉ đếm/điểm, không nội dung gốc).</p>
+      <div id="statsBody"><div class="rule-empty">Đang tải…</div></div>
     </section>
   </main>
 </div>
@@ -368,11 +623,23 @@
 
   let colorOf = {};
   let rounds = 2;
+  let auditors = 1;
+  let useExecutor = false;
+  let useRouter = false;
+  let useMemory = false;
+  let autoLearn = false;
+  let verifiedOnly = false;
+  let summarizeHistory = false;
+  let attachedFiles = [];   // [{token, filename, kind}]
+  let conversation = [];    // [{role, content}] — lịch sử đa lượt của box hiện tại
+  let pendingFinal = "";
+  let strategy = "round_robin";
   let busy = false;
   let controller = null;     // AbortController của lần chạy hiện tại
   let startedAt = 0;
   let modelCount = 0;
   let lastAnswer = "";
+  let lastPrompt = "";
 
   // ── auto-grow textarea ──
   const grow = () => { promptEl.style.height = "auto"; promptEl.style.height = Math.min(promptEl.scrollHeight, 200) + "px"; };
@@ -380,6 +647,170 @@
 
   // ── example chips ──
   document.querySelectorAll("#chips .chip").forEach((c) => c.onclick = () => { promptEl.value = c.dataset.fill; grow(); promptEl.focus(); });
+
+  // ── file attach (tri giác: mọi định dạng → text chia chung cho council) ──
+  $("#attachBtn").onclick = () => $("#fileInput").click();
+  $("#fileInput").onchange = async (e) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length) return;
+    const fd = new FormData();
+    files.forEach((f) => fd.append("files", f));
+    $("#attachBtn").disabled = true;
+    try {
+      const res = await fetch("/api/upload", { method: "POST", body: fd });
+      if (res.ok) {
+        const data = await res.json();
+        (data.files || []).forEach((f) => attachedFiles.push(f));
+      } else {
+        const err = await res.json().catch(() => ({}));
+        flashNote(err.detail || "Upload thất bại.", true);
+      }
+    } catch (_) { flashNote("Upload lỗi mạng.", true); }
+    $("#attachBtn").disabled = false;
+    $("#fileInput").value = "";
+    renderAttachRow();
+  };
+
+  function renderAttachRow() {
+    const row = $("#attachRow");
+    row.hidden = attachedFiles.length === 0;
+    row.innerHTML = "";
+    attachedFiles.forEach((f, idx) => {
+      const chip = el("div", "fchip" + (f.needs_vision ? " warn" : ""));
+      chip.innerHTML = `<span class="fchip__kind">${esc(f.kind)}</span>`
+        + `<span class="fchip__name" title="${esc(f.filename)}">${esc(f.filename)}</span>`
+        + `<span class="fchip__x" data-i="${idx}">×</span>`;
+      chip.querySelector(".fchip__x").onclick = () => { attachedFiles.splice(idx, 1); renderAttachRow(); };
+      row.appendChild(chip);
+    });
+  }
+
+  function flashNote(msg, isErr) {
+    const n = $("#note");
+    const prev = n.textContent;
+    n.textContent = msg;
+    n.classList.toggle("err", !!isErr);
+    setTimeout(() => { n.textContent = prev; n.classList.remove("err"); }, 4000);
+  }
+
+  // ── conversation boxes (localStorage; trang served nên localStorage hoạt động) ──
+  const BOXES_KEY = "theosis_boxes_v1", ACTIVE_KEY = "theosis_active_v1";
+  const MAX_BOXES = 40, MAX_TURNS_PER_BOX = 60;
+  let boxes = [], activeId = null;
+
+  function boxTitle(turns) {
+    const fu = (turns || []).find((t) => t.role === "user");
+    const raw = fu ? fu.content.trim().replace(/\s+/g, " ") : "";
+    if (!raw) return "Hội thoại mới";
+    return raw.length > 42 ? raw.slice(0, 42) + "…" : raw;
+  }
+  function capBoxes(list) {
+    return (list || []).slice(0, MAX_BOXES).map((b) => ({
+      id: b.id, title: b.title, updatedAt: b.updatedAt || 0,
+      turns: (b.turns || []).slice(-MAX_TURNS_PER_BOX),
+    }));
+  }
+  function loadBoxes() {
+    try { return capBoxes(JSON.parse(localStorage.getItem(BOXES_KEY) || "[]")); }
+    catch (_) { return []; }
+  }
+  function persistBoxes() {
+    try {
+      localStorage.setItem(BOXES_KEY, JSON.stringify(capBoxes(boxes)));
+      localStorage.setItem(ACTIVE_KEY, activeId || "");
+    } catch (_) {}
+  }
+  const activeBox = () => boxes.find((b) => b.id === activeId);
+
+  function clearStreamToEmpty() {
+    pendingFinal = "";
+    $("#resultbar").hidden = true;
+    promptEl.value = ""; grow();
+    stream.innerHTML =
+      '<div class="empty" id="empty"><div class="empty__icon"><span></span></div>'
+      + '<div class="empty__title">Luồng đang trống</div>'
+      + '<p>Gửi một câu hỏi để triệu tập council. Bạn sẽ thấy từng model trả lời, chấm chéo nhau, rồi hợp nhất thành câu trả lời mạ vàng.</p></div>';
+  }
+
+  function newBox() {
+    if (busy) return;
+    const b = { id: "b_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+                title: "Hội thoại mới", turns: [], updatedAt: Date.now() };
+    boxes.unshift(b);
+    activeId = b.id;
+    conversation = b.turns;
+    attachedFiles = []; renderAttachRow();
+    persistBoxes(); renderBoxes(); clearStreamToEmpty();
+  }
+
+  function switchBox(id) {
+    if (busy) return;
+    const b = boxes.find((x) => x.id === id);
+    if (!b) return;
+    activeId = id; conversation = b.turns;
+    attachedFiles = []; renderAttachRow();
+    persistBoxes(); renderBoxes(); renderConversation(b.turns);
+  }
+
+  function deleteBox(id) {
+    if (busy) return;
+    boxes = boxes.filter((b) => b.id !== id);
+    if (activeId === id) {
+      if (boxes.length) { activeId = boxes[0].id; conversation = boxes[0].turns; renderConversation(boxes[0].turns); }
+      else { newBox(); return; }
+    }
+    persistBoxes(); renderBoxes();
+  }
+
+  function saveActiveTurns() {
+    let b = activeBox();
+    if (!b) return;
+    b.turns = conversation;
+    b.updatedAt = Date.now();
+    if (b.title === "Hội thoại mới") b.title = boxTitle(conversation);
+    boxes = [b, ...boxes.filter((x) => x.id !== b.id)];   // đưa box vừa dùng lên đầu
+    persistBoxes(); renderBoxes();
+  }
+
+  function renderBoxes() {
+    const list = $("#boxList");
+    if (!list) return;
+    list.innerHTML = "";
+    boxes.forEach((b) => {
+      const row = el("div", "box-row" + (b.id === activeId ? " active" : ""));
+      row.innerHTML = `<span class="box-row__t" title="${esc(b.title)}">${esc(b.title)}</span><span class="box-row__x" title="Xoá">×</span>`;
+      row.querySelector(".box-row__t").onclick = () => switchBox(b.id);
+      row.querySelector(".box-row__x").onclick = (e) => { e.stopPropagation(); deleteBox(b.id); };
+      list.appendChild(row);
+    });
+  }
+
+  function renderConversation(turns) {
+    $("#empty")?.remove();
+    stream.innerHTML = "";
+    $("#resultbar").hidden = true;
+    if (!turns || !turns.length) { clearStreamToEmpty(); return; }
+    let lastFinal = "";
+    turns.forEach((t) => {
+      if (t.role === "user") stream.appendChild(el("div", "user-bubble", esc(t.content)));
+      else { stream.appendChild(el("div", "assistant-bubble", esc(t.content))); lastFinal = t.content; }
+    });
+    if (lastFinal) showResult(lastFinal, null);
+    scrollEnd();
+  }
+
+  function initBoxes() {
+    boxes = loadBoxes();
+    const savedActive = (() => { try { return localStorage.getItem(ACTIVE_KEY); } catch (_) { return null; } })();
+    if (!boxes.length) { newBox(); return; }
+    activeId = boxes.find((b) => b.id === savedActive) ? savedActive : boxes[0].id;
+    conversation = activeBox().turns;
+    renderBoxes();
+    renderConversation(conversation);
+  }
+
+  $("#boxNew").onclick = newBox;
+  $("#newChat").onclick = newBox;
 
   // ── load config ──
   async function loadConfig() {
@@ -392,9 +823,35 @@
       $("#aggModel").textContent = agg.model || "—";
       rounds = (c.settings && c.settings.max_rounds) || 2;
       setRounds(rounds);
+      setAuditors((c.settings && c.settings.auditors_per_answer) || 1);
+      useExecutor = !!(c.settings && c.settings.use_executor);
+      $("#execToggle").checked = useExecutor;
+      strategy = (c.settings && c.settings.strategy) || "round_robin";
+      $("#stratSelect").value = strategy;
+      useRouter = !!(c.settings && c.settings.use_router);
+      $("#routerToggle").checked = useRouter;
+      useMemory = !!(c.settings && c.settings.use_memory);
+      $("#memToggle").checked = useMemory;
+      autoLearn = !!(c.settings && c.settings.auto_learn);
+      $("#autoLearnToggle").checked = autoLearn;
+      verifiedOnly = !!(c.settings && c.settings.verified_only);
+      $("#verifiedOnlyToggle").checked = verifiedOnly;
+      summarizeHistory = !!(c.settings && c.settings.summarize_history);
+      $("#summarizeToggle").checked = summarizeHistory;
       if (c.demo) $("#demoPill").classList.add("show");
     } catch (e) { renderVoices([]); }
     setupApi();
+    refreshMemCount();
+  }
+
+  async function refreshMemCount() {
+    try {
+      const m = await (await fetch("/api/memory")).json();
+      const n = (m.rules || []).length;
+      const badge = $("#memCount");
+      badge.textContent = String(n);
+      badge.style.display = n > 0 ? "" : "none";
+    } catch (_) {}
   }
 
   const warnBadge = (s) => (!s.has_key && !s.mock)
@@ -429,13 +886,158 @@
   function setRounds(v) { rounds = Math.max(1, Math.min(4, v)); $("#rVal").textContent = rounds; $("#rMinus").disabled = rounds <= 1; $("#rPlus").disabled = rounds >= 4; }
   $("#rMinus").onclick = () => setRounds(rounds - 1);
   $("#rPlus").onclick = () => setRounds(rounds + 1);
+  function setAuditors(v) { auditors = Math.max(1, Math.min(3, v)); $("#aVal").textContent = auditors; $("#aMinus").disabled = auditors <= 1; $("#aPlus").disabled = auditors >= 3; }
+  $("#aMinus").onclick = () => setAuditors(auditors - 1);
+  $("#aPlus").onclick = () => setAuditors(auditors + 1);
+  $("#execToggle").onchange = (e) => { useExecutor = e.target.checked; };
+  $("#stratSelect").onchange = (e) => { strategy = e.target.value; };
+  $("#routerToggle").onchange = (e) => { useRouter = e.target.checked; };
+  $("#memToggle").onchange = (e) => { useMemory = e.target.checked; };
+  $("#autoLearnToggle").onchange = (e) => { autoLearn = e.target.checked; };
+  $("#verifiedOnlyToggle").onchange = (e) => { verifiedOnly = e.target.checked; };
+  $("#summarizeToggle").onchange = (e) => { summarizeHistory = e.target.checked; };
 
   // ── tabs ──
   document.querySelectorAll(".tab").forEach((t) => t.onclick = () => {
     document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("is-active", x === t));
     $("#streamPanel").hidden = t.dataset.tab !== "stream";
     $("#apiPanel").hidden = t.dataset.tab !== "api";
+    $("#memoryPanel").hidden = t.dataset.tab !== "memory";
+    $("#statsPanel").hidden = t.dataset.tab !== "stats";
+    if (t.dataset.tab === "memory") renderMemory();
+    if (t.dataset.tab === "stats") renderStats();
   });
+
+  // ── memory review panel ──
+  async function renderMemory() {
+    const list = $("#ruleList");
+    list.innerHTML = '<div class="rule-empty">Đang tải…</div>';
+    let rules = [];
+    try { rules = (await (await fetch("/api/memory")).json()).rules || []; }
+    catch (_) { list.innerHTML = '<div class="rule-empty">Lỗi tải ký ức.</div>'; return; }
+    $("#memCount2").textContent = String(rules.length);
+    refreshMemCount();
+    if (!rules.length) {
+      list.innerHTML = '<div class="rule-empty">Chưa có bài học nào. Dạy ở tab “Luồng tinh luyện”, hoặc bật “Tự học từ lỗi”.</div>';
+      return;
+    }
+    list.innerHTML = "";
+    rules.forEach((r) => list.appendChild(ruleCard(r)));
+  }
+
+  function ruleCard(r) {
+    const card = el("div", "rule " + (r.demoted ? "demoted " : "") + (r.verified ? "verified" : "unverified"));
+    const vbadge = r.verified ? '<span class="rule__badge v">đã duyệt</span>' : '<span class="rule__badge u">chưa duyệt</span>';
+    const dbadge = r.demoted ? '<span class="rule__badge d">⊘ bị hạ</span>' : "";
+    const date = (r.created_at || "").slice(0, 10);
+    const scoreHtml = (r.score && Math.abs(r.score) > 0.0001)
+      ? `<span class="rule__score${r.score < 0 ? " neg" : ""}">hiệu ứng: ${r.score > 0 ? "+" : ""}${r.score}</span>` : "";
+    card.innerHTML =
+      `<div class="rule__top"><div class="rule__guide">${esc(r.guidance)}</div><div class="rule__badges">${vbadge}${dbadge}</div></div>`
+      + `<div class="rule__meta"><span>nguồn: ${esc(r.source || "—")}</span><span>loại: ${esc(r.task_type || "—")}</span><span>dùng: ${r.uses || 0}×</span>${scoreHtml}<span>${esc(date)}</span></div>`
+      + `<div class="rule__acts">`
+      + `<button class="rbtn rbtn--v" data-act="verify">${r.verified ? "Bỏ duyệt" : "✓ Duyệt"}</button>`
+      + `<button class="rbtn" data-act="edit">✎ Sửa</button>`
+      + (r.demoted ? `<button class="rbtn rbtn--v" data-act="restore">↑ Khôi phục</button>` : `<button class="rbtn" data-act="demote">⊘ Hạ</button>`)
+      + `<button class="rbtn rbtn--del" data-act="del">🗑 Xoá</button>`
+      + `</div>`;
+    const acts = card.querySelector(".rule__acts");
+    const post = async (url, body) => { try { await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); } catch (_) {} renderMemory(); };
+    acts.querySelector('[data-act="verify"]').onclick = () => post(`/api/memory/${r.id}/verify`, { verified: !r.verified });
+    const demoteBtn = acts.querySelector('[data-act="demote"]');
+    if (demoteBtn) demoteBtn.onclick = () => post(`/api/memory/${r.id}/demote`, { demoted: true });
+    const restoreBtn = acts.querySelector('[data-act="restore"]');
+    if (restoreBtn) restoreBtn.onclick = () => post(`/api/memory/${r.id}/demote`, { demoted: false });
+    acts.querySelector('[data-act="del"]').onclick = async () => {
+      try { await fetch(`/api/memory/${r.id}`, { method: "DELETE" }); } catch (_) {}
+      renderMemory();
+    };
+    acts.querySelector('[data-act="edit"]').onclick = () => {
+      if (card.querySelector(".rule__edit")) return;
+      const ta = el("textarea", "rule__edit"); ta.value = r.guidance;
+      const save = el("button", "rbtn rbtn--v", "Lưu");
+      save.onclick = async () => {
+        const g = ta.value.trim(); if (!g) return;
+        try { await fetch(`/api/memory/${r.id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ guidance: g }) }); } catch (_) {}
+        renderMemory();
+      };
+      acts.appendChild(save);
+      card.insertBefore(ta, acts);
+      ta.focus();
+    };
+    return card;
+  }
+
+  $("#memRefresh").onclick = () => renderMemory();
+  $("#memClear").onclick = async () => {
+    if (!confirm("Xoá TẤT CẢ bài học trong ký ức? Không hoàn tác được.")) return;
+    try { await fetch("/api/memory/all", { method: "DELETE" }); } catch (_) {}
+    renderMemory();
+  };
+
+  // ── stats dashboard ──
+  $("#statsRefresh").onclick = () => renderStats();
+
+  function statCard(n, label) {
+    return `<div class="stat-card"><div class="stat-card__n">${n}</div><div class="stat-card__l">${esc(label)}</div></div>`;
+  }
+
+  function barChart(data, key, opts) {
+    opts = opts || {};
+    if (!data || !data.length) return `<div class="rule-empty">chưa có dữ liệu</div>`;
+    const max = Math.max(...data.map((d) => d[key])) || 1;
+    const cols = data.slice(-14).map((d) => {
+      const h = Math.max(2, Math.round((d[key] / max) * 76));
+      const val = opts.fmt ? opts.fmt(d[key]) : d[key];
+      return `<div class="chart__col"><div class="chart__val">${val}</div>`
+        + `<div class="chart__bar${opts.green ? " green" : ""}" style="height:${h}px"></div>`
+        + `<div class="chart__lbl">${esc((d.date || "").slice(5))}</div></div>`;
+    }).join("");
+    return `<div class="chart">${cols}</div>`;
+  }
+
+  function sourceRows(bySource, total) {
+    const entries = Object.entries(bySource || {}).sort((a, b) => b[1] - a[1]);
+    if (!entries.length) return `<div class="rule-empty">chưa có rule</div>`;
+    const mx = Math.max(...entries.map((e) => e[1])) || 1;
+    return entries.map(([k, v]) =>
+      `<div class="srow"><span class="srow__k">${esc(k)}</span>`
+      + `<span class="srow__bar" style="width:${Math.round((v / mx) * 150)}px"></span>`
+      + `<span class="srow__v">${v}</span></div>`).join("");
+  }
+
+  async function renderStats() {
+    const body = $("#statsBody");
+    body.innerHTML = '<div class="rule-empty">Đang tải…</div>';
+    let d;
+    try { d = await (await fetch("/api/stats")).json(); }
+    catch (_) { body.innerHTML = '<div class="rule-empty">Lỗi tải thống kê.</div>'; return; }
+    const r = d.rules, run = d.runs;
+    const tot = (r.helpful + r.neutral + r.harmful) || 1;
+    const pc = (x) => (x / tot) * 100;
+    let html = "";
+    html += `<div class="stat-cards">${statCard(r.total, "tổng rule")}${statCard(r.verified, "đã duyệt")}${statCard(r.demoted, "bị hạ")}${statCard(run.total_runs, "lượt chạy")}</div>`;
+
+    html += `<div class="stat-sec"><div class="stat-sec__h">Sức khỏe rule</div>`
+      + `<div class="health"><span class="h-good" style="width:${pc(r.helpful)}%"></span><span class="h-neu" style="width:${pc(r.neutral)}%"></span><span class="h-bad" style="width:${pc(r.harmful)}%"></span></div>`
+      + `<div class="health-legend"><span><i class="h-good"></i>giúp ${r.helpful}</span><span><i class="h-neu"></i>trung tính ${r.neutral}</span><span><i class="h-bad"></i>hại ${r.harmful}</span></div></div>`;
+
+    html += `<div class="stat-sec"><div class="stat-sec__h">Theo nguồn</div>${sourceRows(r.by_source)}</div>`;
+
+    if (r.top_used && r.top_used.length) {
+      html += `<div class="stat-sec"><div class="stat-sec__h">Hay dùng nhất</div>`
+        + r.top_used.map((t) => `<div class="toprow"><span class="toprow__u">${t.uses}×</span><span>${esc(t.guidance)}${t.demoted ? " <span style='color:var(--rose)'>[bị hạ]</span>" : ""}</span></div>`).join("")
+        + `</div>`;
+    }
+
+    html += `<div class="stat-sec"><div class="stat-sec__h">Lượt chạy theo ngày</div>${barChart(run.runs_by_day, "count")}</div>`;
+    html += `<div class="stat-sec"><div class="stat-sec__h">Điểm trung bình theo ngày</div>${barChart(run.avg_score_by_day, "avg", { green: true, fmt: (v) => v.toFixed(2) })}</div>`;
+
+    const tt = Object.entries(run.task_types || {}).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${esc(k)}:${v}`).join(" · ") || "—";
+    html += `<div class="stat-meta">Tổng lượt áp dụng rule: ${r.total_uses} · ~${run.avg_tokens} tok/lần · ${run.total_tokens} tok tổng<br/>Loại task: ${tt}</div>`;
+
+    body.innerHTML = html;
+  }
 
   // ── stream rendering helpers ──
   const scrollEnd = () => { const last = stream.lastElementChild; if (last) last.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "nearest" }); };
@@ -494,6 +1096,8 @@
     }
     $("#resultMeta").textContent = meta;
     $("#resultbar").hidden = false;
+    const teach = $("#teach");
+    if (teach) { teach.open = false; $("#teachInput").value = ""; $("#teachHint").textContent = "chỉ rule trừu tượng được lưu — content-free"; $("#teachBtn").disabled = false; }
     requestAnimationFrame(() => {
       if (body.scrollHeight > 150) { body.classList.add("is-collapsed"); $("#resultExpand").style.display = ""; $("#resultExpand").textContent = "Mở rộng"; }
       else { $("#resultExpand").style.display = "none"; }
@@ -501,6 +1105,29 @@
   }
   $("#resultExpand").onclick = () => { const b = $("#resultBody"); const c = b.classList.toggle("is-collapsed"); $("#resultExpand").textContent = c ? "Mở rộng" : "Thu gọn"; };
   $("#resultCopy").onclick = async () => { try { await navigator.clipboard.writeText(lastAnswer); $("#resultCopy").textContent = "Đã chép ✓"; setTimeout(() => $("#resultCopy").textContent = "Sao chép", 1400); } catch (_) {} };
+
+  $("#teachBtn").onclick = async () => {
+    const correction = $("#teachInput").value.trim();
+    const hint = $("#teachHint");
+    if (!correction) { hint.textContent = "Nhập điều cần sửa trước đã."; return; }
+    const btn = $("#teachBtn");
+    btn.disabled = true; hint.textContent = "Đang rút bài học…";
+    try {
+      const r = await fetch("/api/learn", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ request: lastPrompt, bad_answer: lastAnswer, correction }),
+      });
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      const rule = await r.json();
+      hint.innerHTML = `Đã ghi nhớ ✓ <span style="color:var(--green)">${esc(rule.guidance)}</span>`;
+      $("#teachInput").value = "";
+      refreshMemCount();
+    } catch (_) {
+      hint.textContent = "Lỗi khi ghi nhớ — thử lại.";
+      btn.disabled = false;
+    }
+  };
 
   function handle(ev) {
     switch (ev.type) {
@@ -518,10 +1145,10 @@
         break;
       case "audit_done": {
         clearRunning(`run-audit-${ev.round}`);
-        Object.entries(ev.critiques).forEach(([target, crit]) => {
-          const auditor = ev.pairs[target];
+        const reviews = ev.reviews || Object.entries(ev.critiques || {}).map(([target, crit]) => ({ target, auditor: (ev.pairs || {})[target], critique: crit }));
+        reviews.forEach(({ target, auditor, critique }) => {
           const titleHtml = `${esc(auditor)} <span class="arrow">▸ chấm</span> ${esc(target)}`;
-          voiceCard(auditor, crit, { audit: true, color: colorOf[auditor], titleHtml, badgeHtml: verdictBadge(crit) });
+          voiceCard(auditor, critique, { audit: true, color: colorOf[auditor], titleHtml, badgeHtml: verdictBadge(critique) });
         });
         phase(`Vòng ${ev.round + 1} · Vá`);
         running(`run-patch-${ev.round}`, "Các model đang tự sửa theo critique…");
@@ -540,7 +1167,47 @@
         stream.appendChild(el("div", "marker", `<span>✦</span> Hội tụ hoàn tất — câu trả lời ở thanh trên cùng`));
         scrollEnd();
         showResult(ev.final, ev.cost);
+        pendingFinal = ev.final || "";
         break;
+      case "route": {
+        const tags = (ev.slots || []).map((n) => `<span class="route-chip">${esc(n)}</span>`).join("");
+        const ex = ev.use_executor ? " · executor" : "";
+        const src = ev.routed ? "" : ` <span style="color:var(--muted)">(mặc định)</span>`;
+        stream.appendChild(el("div", "route-card",
+          `<div class="route-head"><span class="route-mark">⚖</span> Router${src}<span class="route-meta">${esc(ev.task_type)} · ${esc(ev.strategy)} · ${ev.rounds} vòng${ex}</span></div>`
+          + `<div class="route-slots">${tags}</div>`
+          + (ev.reason ? `<div class="route-reason">${esc(ev.reason)}</div>` : "")));
+        scrollEnd();
+        break;
+      }
+      case "learned": {
+        const r = ev.rule || {};
+        const LBL = { executor_fail: "executor bắt một câu sai", low_confidence: "hội đồng tự chấm thấp", no_converge: "hội đồng không hội tụ" };
+        const why = LBL[ev.source] || "phát hiện câu chưa ổn";
+        stream.appendChild(el("div", "learn-card",
+          `<div class="learn-head"><span>✦</span> Tự học · ${esc(why)}</div>`
+          + `<div class="learn-rule">${esc(r.guidance || "")}</div>`
+          + `<div class="learn-src">đã ghi nhớ · nguồn: ${esc(ev.source || "—")} · chưa duyệt (xem tab Ký ức)</div>`));
+        scrollEnd(); refreshMemCount();
+        break;
+      }
+      case "memory": {
+        const items = (ev.rules || []).map((g) => `<div class="mem-item">${esc(g)}</div>`).join("");
+        stream.appendChild(el("div", "mem-card",
+          `<div class="mem-head"><span>✦</span> Ký ức · áp dụng ${(ev.rules || []).length} bài học</div>`
+          + `<div class="mem-list">${items}</div>`));
+        scrollEnd();
+        break;
+      }
+      case "evidence": {
+        Object.entries(ev.results || {}).forEach(([name, r]) => {
+          if (r.status === "na") return;
+          const icon = r.status === "pass" ? "✓" : "✗";
+          stream.appendChild(el("div", "evidence " + r.status, `${icon} kiểm chứng ${esc(name)}: ${esc(r.summary)}`));
+        });
+        scrollEnd();
+        break;
+      }
       case "slot_error":
         stream.appendChild(el("div", "stopped", `⚠ ${esc(ev.slot)} lỗi ở ${esc(ev.phase)} (${esc(ev.message)}) — bỏ qua, vòng vẫn chạy.`));
         scrollEnd();
@@ -553,6 +1220,23 @@
         stream.appendChild(el("div", "stopped", `■ Chạm trần token (${(ev.tokens || 0).toLocaleString()}) — merge sớm.`));
         scrollEnd();
         break;
+      case "attachments": {
+        const names = (ev.files || []).map((f) => esc(f.filename)).join(", ");
+        stream.appendChild(el("div", "attachments-line", `Council đọc ${(ev.files || []).length} tài liệu: ${names}`));
+        scrollEnd();
+        break;
+      }
+      case "artifact": {
+        const card = el("div", "artifact-card");
+        card.innerHTML =
+          `<div class="artifact-card__ic">📄</div>`
+          + `<div class="artifact-card__meta"><div class="artifact-card__name">${esc(ev.filename)}</div>`
+          + `<div class="artifact-card__sub">${esc(ev.lang || "")} · ${(ev.bytes || 0).toLocaleString()} bytes</div></div>`
+          + `<a class="artifact-card__dl" href="${esc(ev.url)}" download>Tải về</a>`;
+        stream.appendChild(card);
+        scrollEnd();
+        break;
+      }
       case "error":
         document.querySelectorAll(".running").forEach((r) => r.remove());
         stream.appendChild(el("div", "errcard", `<b>Không chạy được.</b> ${esc(ev.message)}<br/>Kiểm tra API key và base_url của slot trong <code>config.yaml</code>, hoặc thử lại với chế độ demo.`));
@@ -569,6 +1253,7 @@
     const slots = enabledSlots();
     if (!slots.length) { note.textContent = "Bật ít nhất một model trong council."; note.classList.add("err"); return; }
     note.classList.remove("err"); note.textContent = "Enter để gửi · Shift+Enter xuống dòng";
+    lastPrompt = prompt;
 
     busy = true; startedAt = performance.now(); modelCount = slots.length;
     controller = new AbortController();
@@ -577,13 +1262,16 @@
     $("#refineLabel").textContent = "Đang tinh luyện…";
     $("#resultbar").hidden = true;
     $("#empty")?.remove();
-    stream.innerHTML = "";
+    pendingFinal = "";
+    if (conversation.length) stream.appendChild(el("div", "turn-sep"));
+    stream.appendChild(el("div", "user-bubble", esc(prompt)));
+    scrollEnd();
 
     try {
       const resp = await fetch("/api/run", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt, max_rounds: rounds, enabled_slots: slots }),
+        body: JSON.stringify({ prompt, max_rounds: rounds, auditors_per_answer: auditors, use_executor: useExecutor, strategy, use_router: useRouter, use_memory: useMemory, auto_learn: autoLearn, verified_only: verifiedOnly, summarize_history: summarizeHistory, file_tokens: attachedFiles.map((f) => f.token), history: conversation, enabled_slots: slots }),
         signal: controller.signal,
       });
       if (!resp.ok || !resp.body) throw new Error("HTTP " + resp.status);
@@ -600,6 +1288,12 @@
           buf = buf.slice(idx + 1);
           if (line) { try { handle(JSON.parse(line)); } catch (_) {} }
         }
+      }
+      // chốt lượt vào lịch sử đa lượt (cho lượt kế tiếp)
+      if (pendingFinal) {
+        conversation.push({ role: "user", content: prompt });
+        conversation.push({ role: "assistant", content: pendingFinal });
+        saveActiveTurns();
       }
     } catch (e) {
       document.querySelectorAll(".running").forEach((r) => r.remove());
@@ -733,6 +1427,7 @@ print(r.choices[0].message.content)`,
 
   initProviders();
   loadConfig();
+  initBoxes();
 })();
 </script>
 </body>
