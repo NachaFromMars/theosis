@@ -11,6 +11,7 @@ from typing import List, Tuple
 
 import yaml
 
+from .metrics import set_cost_table
 from .models import MiddleLayer, ModelSlot
 
 # Load a local .env if present (optional dependency).
@@ -40,6 +41,19 @@ def _slot_from_dict(d: dict, runtime: bool = False) -> ModelSlot:
         enabled=d.get("enabled", True),
         runtime=runtime,
     )
+
+
+DEFAULT_SETTINGS = {
+    "max_rounds": 2,
+    "strategy": "round_robin",
+    "auditors_per_answer": 1,
+    "use_executor": False,
+    "use_router": False,
+    "use_memory": False,
+    "auto_learn": False,
+    "verified_only": False,
+    "summarize_history": False,
+}
 
 
 def demo_slots() -> List[ModelSlot]:
@@ -85,13 +99,15 @@ def load_config(path: str = None) -> Tuple[List[ModelSlot], ModelSlot, dict]:
     path = path or DEFAULT_CONFIG_PATH
 
     if os.environ.get("THEOSIS_DEMO") == "1" or not os.path.exists(path):
-        slots, aggregator, settings = demo_slots(), demo_aggregator(), {"max_rounds": 2}
+        slots, aggregator, settings = demo_slots(), demo_aggregator(), dict(DEFAULT_SETTINGS)
     else:
         with open(path, "r", encoding="utf-8") as f:
             cfg = yaml.safe_load(f) or {}
         slots = [_slot_from_dict(s) for s in cfg.get("slots", [])]
         aggregator = _slot_from_dict(cfg["aggregator"]) if cfg.get("aggregator") else demo_aggregator()
-        settings = cfg.get("settings") or {"max_rounds": 2}
+        settings = {**DEFAULT_SETTINGS, **(cfg.get("settings") or {})}  # config.yaml ghi đè default
+        if cfg.get("pricing"):
+            set_cost_table(cfg["pricing"])
         if not slots:
             slots = demo_slots()
 
