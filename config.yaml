@@ -56,3 +56,22 @@ aggregator:
 
 settings:
   max_rounds: 2
+  strategy: round_robin       # ai chấm ai: round_robin | all_vs_all | star
+  use_router: false           # bật = một model tự phân loại task → chọn model + chiến lược + vòng + executor
+  # router: opus              # (tuỳ chọn) slot làm router; mặc định dùng aggregator
+  auditors_per_answer: 1     # (chỉ áp dụng cho round_robin) mỗi câu bị bao nhiêu model soi; tối đa = số model − 1
+  use_executor: false        # ⚠️ Bật = CHẠY code Python do model sinh ra (sandbox best-effort). Chỉ bật trên máy bạn kiểm soát. Xem SECURITY.md.
+  use_memory: false           # bật = chèn "bài học đã ghi nhớ" (rule trừu tượng) liên quan vào prompt; ghi log metrics content-free
+  auto_learn: false           # bật = tự rút rule khi executor (ground truth) bắt câu trả lời SAI (cần use_executor). Rule chưa verified.
+  verified_only: false        # bật = chỉ tiêm rule ĐÃ DUYỆT vào prompt (cổng chất lượng; rule auto-learn chưa duyệt sẽ bị bỏ qua)
+  summarize_history: false    # bật = hội thoại dài thì nén các lượt CŨ thành tóm tắt (thêm 1 lời gọi model khi kích hoạt; chặn phình token)
+
+# Bảng giá để ƯỚC chi phí (USD / 1M token: [input, output]).
+# Model không liệt kê ở đây dùng giá mặc định [1.0, 3.0]. Chỉnh theo giá thực tế.
+pricing:
+  gpt-4o: [2.5, 10.0]
+  gpt-4o-mini: [0.15, 0.6]
+  claude-opus-4-8: [15.0, 75.0]
+  claude-3.5-sonnet: [3.0, 15.0]
+  deepseek-chat: [0.27, 1.10]
+  grok-4: [5.0, 15.0]
