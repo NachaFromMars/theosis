@@ -29,6 +29,14 @@ COST_TABLE = {
 DEFAULT_PRICE = (1.0, 3.0)
 
 
+def set_cost_table(table: Dict[str, object], merge: bool = True) -> None:
+    """Cập nhật bảng giá lúc runtime (vd: nạp từ config.yaml). merge=True để gộp đè."""
+    global COST_TABLE
+    if not table:
+        return
+    COST_TABLE = {**COST_TABLE, **table} if merge else dict(table)
+
+
 def estimate_cost(model: str, usage: Dict[str, int]) -> float:
     p_in, p_out = COST_TABLE.get((model or "").strip(), DEFAULT_PRICE)
     pt = usage.get("prompt_tokens", 0)
