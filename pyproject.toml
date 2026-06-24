@@ -4,11 +4,11 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "theosis"
-version = "2.0.0"
+version = "2.14.0"
 description = "A self-improving council engine where multiple AI models draft, attack, repair, and merge into one answer."
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Apache-2.0" }
+license = { text = "MIT" }
 authors = [{ name = "NachaFromMars" }]
 keywords = ["llm", "multi-agent", "mixture-of-agents", "ai", "orchestration", "council"]
 classifiers = [
@@ -22,10 +22,12 @@ dependencies = [
   "httpx>=0.27",
   "pyyaml>=6.0",
   "python-dotenv>=1.0",
+  "python-multipart>=0.0.9",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "pytest-asyncio>=0.23", "ruff>=0.4"]
+files = ["pypdf>=4.0", "python-docx>=1.1", "openpyxl>=3.1", "Pillow>=10.0"]
 
 [project.urls]
 Homepage = "https://github.com/NachaFromMars/theosis"
